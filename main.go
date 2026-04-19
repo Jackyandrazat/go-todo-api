@@ -27,6 +27,7 @@ func main() {
 
 	r.POST("/register", handler.Register)
 	r.POST("/login", handler.Login)
+	r.POST("/refresh", handler.RefreshToken)
 
 	// protected
 	auth := r.Group("/")
