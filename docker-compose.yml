@@ -1,0 +1,40 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: pulse-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: pulse
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  api:
+    build: .
+    container_name: pulse-api
+    restart: unless-stopped
+    depends_on:
+      - postgres
+    environment:
+      APP_ENV: production
+      APP_PORT: 8080
+
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_NAME: pulse
+
+      JWT_SECRET: change-me-in-production
+      JWT_ACCESS_EXP: 15m
+      JWT_REFRESH_EXP: 168h
+    ports:
+      - "8080:8080"
+
+volumes:
+  postgres_data:

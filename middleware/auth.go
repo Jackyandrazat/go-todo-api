@@ -4,34 +4,56 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/gin-gonic/gin"
-	"github.com/golang-jwt/jwt/v5"
-)
+	"go-todo-api/response"
+	"go-todo-api/utils"
 
-var jwtKey = []byte("secret_key")
+	"github.com/gin-gonic/gin"
+)
 
 func AuthMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		// println("MIDDLEWARE HIT")
 		authHeader := c.GetHeader("Authorization")
 
 		if authHeader == "" {
-			c.JSON(http.StatusUnauthorized, gin.H{"error": "Missing token"})
+			response.Error(
+				c,
+				http.StatusUnauthorized,
+				"authorization header required",
+				nil,
+			)
 			c.Abort()
 			return
 		}
 
-		tokenString := strings.Split(authHeader, " ")[1]
+		parts := strings.Split(authHeader, " ")
 
-		token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
-			return jwtKey, nil
-		})
-
-		if err != nil || !token.Valid {
-			c.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid token"})
+		if len(parts) != 2 || parts[0] != "Bearer" {
+			response.Error(
+				c,
+				http.StatusUnauthorized,
+				"invalid authorization format",
+				nil,
+			)
 			c.Abort()
 			return
 		}
+
+		tokenString := parts[1]
+
+		claims, err := utils.ValidateToken(tokenString)
+		if err != nil {
+			response.Error(
+				c,
+				http.StatusUnauthorized,
+				"invalid or expired token",
+				nil,
+			)
+			c.Abort()
+			return
+		}
+
+		c.Set("user_id", claims.UserID)
+		c.Set("email", claims.Email)
 
 		c.Next()
 	}
