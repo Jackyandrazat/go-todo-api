@@ -92,7 +92,7 @@ func (r *DashboardRepository) GetRecentTasks(
 	var todos []model.Todo
 
 	err := config.DB.
-		Where("user_id = ?", userID).
+		Where("user_id = ? AND done = ?", userID, false).
 		Order("created_at DESC").
 		Limit(limit).
 		Find(&todos).

@@ -9,6 +9,7 @@ type BudgetRepository struct{}
 
 type BudgetWithUsage struct {
 	ID           uint    `json:"id"`
+	UserID       uint    `json:"user_id"`
 	CategoryID   uint    `json:"category_id"`
 	CategoryName string  `json:"category_name"`
 	Amount       float64 `json:"budget"`
@@ -84,6 +85,7 @@ func (r *BudgetRepository) GetBudgetsWithUsage(
 	err := config.DB.Raw(`
 		SELECT
 			b.id,
+			b.user_id,
 			b.category_id,
 			tc.name as category_name,
 			b.amount,
@@ -97,12 +99,47 @@ func (r *BudgetRepository) GetBudgetsWithUsage(
 			ON t.user_id = b.user_id
 			AND t.category_id = tc.id
 			AND t.type = 'expense'
+			AND t.deleted_at IS NULL
 			AND TO_CHAR(t.transaction_date, 'YYYY-MM') = b.month
 		WHERE b.user_id = ?
 			AND b.month = ?
-		GROUP BY b.id, tc.name
+			AND b.deleted_at IS NULL
+		GROUP BY b.id, b.user_id, tc.name
 		ORDER BY tc.name ASC
 	`, userID, month).Scan(&result).Error
+
+	return result, err
+}
+
+func (r *BudgetRepository) GetActiveBudgetsWithUsage(
+	month string,
+) ([]BudgetWithUsage, error) {
+	var result []BudgetWithUsage
+
+	err := config.DB.Raw(`
+		SELECT
+			b.id,
+			b.user_id,
+			b.category_id,
+			tc.name as category_name,
+			b.amount,
+			COALESCE(SUM(t.amount), 0) as spent,
+			(b.amount - COALESCE(SUM(t.amount), 0)) as remaining,
+			b.month
+		FROM budgets b
+		JOIN transaction_categories tc
+			ON tc.id = b.category_id
+		LEFT JOIN transactions t
+			ON t.user_id = b.user_id
+			AND t.category_id = tc.id
+			AND t.type = 'expense'
+			AND t.deleted_at IS NULL
+			AND TO_CHAR(t.transaction_date, 'YYYY-MM') = b.month
+		WHERE b.month = ?
+			AND b.deleted_at IS NULL
+		GROUP BY b.id, b.user_id, tc.name
+		ORDER BY tc.name ASC
+	`, month).Scan(&result).Error
 
 	return result, err
 }

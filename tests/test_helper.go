@@ -79,3 +79,36 @@ func JSONRequest(
 
 	return w
 }
+
+func RegisterAndLogin(t *testing.T, router *gin.Engine) (string, uint) {
+	register := map[string]interface{}{
+		"name":     "Test User",
+		"username": "tester",
+		"email":    "test@example.com",
+		"password": "password123",
+	}
+
+	w := JSONRequest(router, "POST", "/auth/register", register, "")
+	require.Equal(t, 201, w.Code)
+
+	login := map[string]interface{}{
+		"email":    "test@example.com",
+		"password": "password123",
+	}
+
+	w = JSONRequest(router, "POST", "/auth/login", login, "")
+	require.Equal(t, 200, w.Code)
+
+	var res struct {
+		Data struct {
+			AccessToken string `json:"access_token"`
+			User        struct {
+				ID uint `json:"id"`
+			} `json:"user"`
+		} `json:"data"`
+	}
+	err := json.Unmarshal(w.Body.Bytes(), &res)
+	require.NoError(t, err)
+
+	return res.Data.AccessToken, res.Data.User.ID
+}
