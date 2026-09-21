@@ -22,6 +22,6 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 COPY --from=builder /app/pulse-api .
 
-EXPOSE 8080
+EXPOSE 8088
 
 CMD ["./pulse-api"]
