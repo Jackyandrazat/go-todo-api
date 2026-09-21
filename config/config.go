@@ -46,7 +46,7 @@ func LoadConfig() {
 
 	Config = AppConfig{
 		AppEnv:        getEnv("APP_ENV", "development"),
-		AppPort:       getEnv("APP_PORT", "8080"),
+		AppPort:       getEnv("PORT", getEnv("APP_PORT", "8080")),
 		DBHost:        getEnv("DB_HOST", ""),
 		DBPort:        getEnv("DB_PORT", ""),
 		DBUser:        getEnv("DB_USER", ""),
