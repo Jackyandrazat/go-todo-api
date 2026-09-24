@@ -15,7 +15,11 @@ var DB *gorm.DB
 func ConnectDB() {
 	sslmode := Config.DBSSLMode
 	if sslmode == "" {
-		sslmode = "disable"
+		if Config.DBHost != "localhost" && Config.DBHost != "127.0.0.1" && Config.DBHost != "postgres" && Config.DBHost != "" {
+			sslmode = "require"
+		} else {
+			sslmode = "disable"
+		}
 	}
 
 	dsn := fmt.Sprintf(
@@ -76,7 +80,11 @@ func connect(
 	sslmode string,
 ) {
 	if sslmode == "" {
-		sslmode = "disable"
+		if host != "localhost" && host != "127.0.0.1" && host != "postgres" && host != "" {
+			sslmode = "require"
+		} else {
+			sslmode = "disable"
+		}
 	}
 
 	dsn := fmt.Sprintf(

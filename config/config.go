@@ -46,15 +46,21 @@ func LoadConfig() {
 		_ = godotenv.Load()
 	}
 
+	defaultSSL := "disable"
+	hostEnv := getEnv("DB_HOST", "")
+	if hostEnv != "localhost" && hostEnv != "127.0.0.1" && hostEnv != "postgres" && hostEnv != "" {
+		defaultSSL = "require"
+	}
+
 	Config = AppConfig{
 		AppEnv:        getEnv("APP_ENV", "development"),
-		AppPort:       getEnv("PORT", getEnv("APP_PORT", "8080")),
-		DBHost:        getEnv("DB_HOST", ""),
+		AppPort:       getEnv("PORT", getEnv("APP_PORT", "8088")),
+		DBHost:        hostEnv,
 		DBPort:        getEnv("DB_PORT", ""),
 		DBUser:        getEnv("DB_USER", ""),
 		DBPassword:    getEnv("DB_PASSWORD", ""),
 		DBName:        getEnv("DB_NAME", ""),
-		DBSSLMode:     getEnv("DB_SSLMODE", "disable"),
+		DBSSLMode:     getEnv("DB_SSLMODE", defaultSSL),
 		JWTSecret:     getEnv("JWT_SECRET", "super-secret-secret-change-this"),
 		JWTAccessExp:  parseDuration(getEnv("JWT_ACCESS_EXP", "15m")),
 		JWTRefreshExp: parseDuration(getEnv("JWT_REFRESH_EXP", "168h")),
