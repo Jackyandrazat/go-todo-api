@@ -47,7 +47,13 @@ func SetupRouter(r *gin.Engine) *gin.Engine {
 		}
 		c.Redirect(302, "https://expo.dev/artifacts/eas/kZsvVWVulEtE7YTZIQZC6_4NlhxqBELOjViSe8I_MtQ.apk")
 	})
-	r.Static("/download", "./public/download")
+	r.GET("/download/pulse-v1.0.0.apk", func(c *gin.Context) {
+		if _, err := os.Stat("./public/download/pulse-v1.0.0.apk"); err == nil {
+			c.File("./public/download/pulse-v1.0.0.apk")
+			return
+		}
+		c.Redirect(302, "https://expo.dev/artifacts/eas/kZsvVWVulEtE7YTZIQZC6_4NlhxqBELOjViSe8I_MtQ.apk")
+	})
 
 	r.GET("/ready", func(c *gin.Context) {
 		sqlDB, err := config.DB.DB()
