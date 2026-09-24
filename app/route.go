@@ -40,6 +40,10 @@ func SetupRouter(r *gin.Engine) *gin.Engine {
 	r.StaticFile("/privacy.html", "./public/privacy.html")
 	r.StaticFile("/terms", "./public/terms.html")
 	r.StaticFile("/terms.html", "./public/terms.html")
+	r.StaticFile("/qr-expo.svg", "./public/qr-expo.svg")
+	r.StaticFile("/qr-expo.png", "./public/qr-expo.png")
+	r.StaticFile("/qr-direct.svg", "./public/qr-direct.svg")
+	r.StaticFile("/qr-direct.png", "./public/qr-direct.png")
 	r.GET("/download/pulse-latest.apk", func(c *gin.Context) {
 		if _, err := os.Stat("./public/download/pulse-latest.apk"); err == nil {
 			c.File("./public/download/pulse-latest.apk")

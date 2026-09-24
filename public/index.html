@@ -933,6 +933,39 @@
       margin: 16px 0 20px;
     }
 
+    .qr-tabs {
+      display: inline-flex;
+      background: #EEF5F4;
+      padding: 4px;
+      border-radius: 30px;
+      margin-bottom: 14px;
+      gap: 4px;
+      border: 1px solid rgba(52, 144, 139, 0.15);
+    }
+
+    .qr-tab-btn {
+      border: none;
+      background: transparent;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #64748B;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+
+    .qr-tab-btn:hover {
+      color: var(--brand-deep-teal);
+    }
+
+    .qr-tab-btn.active {
+      background: #FFFFFF;
+      color: var(--brand-deep-teal);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
     .qr-box {
       width: 170px;
       height: 170px;
@@ -1083,7 +1116,9 @@
       margin-bottom: 6px;
     }
 
-    .form-select, .form-textarea, .form-input {
+    .form-select,
+    .form-textarea,
+    .form-input {
       width: 100%;
       padding: 12px 14px;
       border-radius: 10px;
@@ -1096,7 +1131,9 @@
       box-sizing: border-box;
     }
 
-    .form-select:focus, .form-textarea:focus, .form-input:focus {
+    .form-select:focus,
+    .form-textarea:focus,
+    .form-input:focus {
       outline: none;
       border-color: var(--brand-deep-teal);
       background: #FFFFFF;
@@ -1780,53 +1817,35 @@
             <h4 style="font-size: 19px; font-weight: 800; color: var(--primary-dark); margin-bottom: 6px;">
               Scan QR untuk Mengunduh
             </h4>
-            <p style="font-size: 13.5px; color: var(--text-muted);">
-              Arahkan kamera smartphone Anda ke kode QR di bawah untuk membuka tautan unduhan langsung di perangkat:
+            <p style="font-size: 13.5px; color: var(--text-muted); margin-bottom: 12px;">
+              Arahkan kamera smartphone Anda ke kode QR di bawah untuk membuka tautan instalasi langsung di perangkat:
             </p>
 
             <div class="qr-wrapper">
-              <div class="qr-box">
-                <!-- Clean Modern SVG QR Code Placeholder -->
-                <svg width="140" height="140" viewBox="0 0 100 100" fill="none">
-                  <!-- Outer frame corners -->
-                  <rect x="5" y="5" width="26" height="26" rx="4" stroke="#123432" stroke-width="4" fill="none" />
-                  <rect x="11" y="11" width="14" height="14" rx="2" fill="#34908B" />
-                  <rect x="69" y="5" width="26" height="26" rx="4" stroke="#123432" stroke-width="4" fill="none" />
-                  <rect x="75" y="11" width="14" height="14" rx="2" fill="#34908B" />
-                  <rect x="5" y="69" width="26" height="26" rx="4" stroke="#123432" stroke-width="4" fill="none" />
-                  <rect x="11" y="75" width="14" height="14" rx="2" fill="#34908B" />
-                  <!-- Data Dots Grid -->
-                  <rect x="38" y="8" width="6" height="6" rx="1.5" fill="#123432" />
-                  <rect x="48" y="8" width="6" height="6" rx="1.5" fill="#6FBFB2" />
-                  <rect x="58" y="8" width="6" height="6" rx="1.5" fill="#123432" />
-                  <rect x="38" y="20" width="6" height="6" rx="1.5" fill="#34908B" />
-                  <rect x="48" y="20" width="6" height="6" rx="1.5" fill="#123432" />
-                  <rect x="58" y="20" width="6" height="6" rx="1.5" fill="#6FBFB2" />
-                  <rect x="8" y="38" width="6" height="6" rx="1.5" fill="#6FBFB2" />
-                  <rect x="20" y="38" width="6" height="6" rx="1.5" fill="#123432" />
-                  <rect x="38" y="38" width="24" height="24" rx="5" fill="#FDF4AF" stroke="#34908B" stroke-width="2" />
-                  <!-- Center Pulse 'P' Logo -->
-                  <text x="50" y="55" font-family="'Plus Jakarta Sans', sans-serif" font-weight="900" font-size="16"
-                    fill="#123432" text-anchor="middle">P</text>
-                  <rect x="70" y="38" width="6" height="6" rx="1.5" fill="#123432" />
-                  <rect x="84" y="38" width="6" height="6" rx="1.5" fill="#34908B" />
-                  <rect x="8" y="48" width="6" height="6" rx="1.5" fill="#123432" />
-                  <rect x="20" y="48" width="6" height="6" rx="1.5" fill="#6FBFB2" />
-                  <rect x="70" y="48" width="6" height="6" rx="1.5" fill="#6FBFB2" />
-                  <rect x="84" y="48" width="6" height="6" rx="1.5" fill="#123432" />
-                  <rect x="38" y="70" width="6" height="6" rx="1.5" fill="#123432" />
-                  <rect x="48" y="70" width="6" height="6" rx="1.5" fill="#34908B" />
-                  <rect x="58" y="70" width="6" height="6" rx="1.5" fill="#123432" />
-                  <rect x="70" y="70" width="6" height="6" rx="1.5" fill="#34908B" />
-                  <rect x="84" y="70" width="6" height="6" rx="1.5" fill="#6FBFB2" />
-                  <rect x="38" y="84" width="6" height="6" rx="1.5" fill="#6FBFB2" />
-                  <rect x="48" y="84" width="6" height="6" rx="1.5" fill="#123432" />
-                  <rect x="70" y="84" width="6" height="6" rx="1.5" fill="#123432" />
-                  <rect x="84" y="84" width="6" height="6" rx="1.5" fill="#34908B" />
-                </svg>
+              <div class="qr-tabs">
+                <button type="button" id="qr-tab-expo" class="qr-tab-btn active" onclick="switchQrTab('expo')">⚡ Expo Build</button>
+                <button type="button" id="qr-tab-direct" class="qr-tab-btn" onclick="switchQrTab('direct')">📥 Unduh APK</button>
               </div>
-              <span
-                style="font-size: 12px; font-weight: 700; color: var(--brand-deep-teal);">pulse.kodeeweb.com/download</span>
+
+              <a id="qr-link" href="https://expo.dev/accounts/jackyandrazat/projects/pulse-app/builds/c27d4d22-4673-467f-80f9-c2b98018e630"
+                target="_blank" title="Klik atau Pindai untuk Membuka Halaman Instalasi">
+                <div class="qr-box">
+                  <img id="qr-img" src="/qr-expo.png" alt="Scan QR Code Expo Pulse" width="146" height="146"
+                    style="display: block; border-radius: 6px;">
+                </div>
+              </a>
+              <div style="display: flex; flex-direction: column; gap: 4px; align-items: center;">
+                <a id="qr-direct-link" href="https://expo.dev/accounts/jackyandrazat/projects/pulse-app/builds/c27d4d22-4673-467f-80f9-c2b98018e630" target="_blank"
+                  style="font-size: 13px; font-weight: 700; color: var(--brand-deep-teal); text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+                  <span>🌐 Buka Halaman Expo</span>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                    <polyline points="15 3 21 3 21 9"></polyline>
+                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                  </svg>
+                </a>
+                <span id="qr-caption" style="font-size: 11.5px; color: var(--text-muted);">Pindai kamera untuk membuka halaman instalasi Expo Build</span>
+              </div>
             </div>
 
             <!-- 3 Simple Steps -->
@@ -1867,10 +1886,13 @@
             <span style="color: var(--brand-deep-teal);">Bantu Kami Membangun Lebih Baik.</span>
           </h2>
           <p class="feedback-desc">
-            Pulse dirilis dan dikembangkan secara independen oleh satu orang pengembang. Kami percaya bahwa aplikasi produktivitas yang hebat lahir dari kebutuhan nyata dan masukan jujur para penggunanya.
+            Pulse dirilis dan dikembangkan secara independen oleh satu orang pengembang. Kami percaya bahwa aplikasi
+            produktivitas yang hebat lahir dari kebutuhan nyata dan masukan jujur para penggunanya.
           </p>
           <p class="feedback-desc" style="margin-top: -12px;">
-            Setiap saran, laporan kendala, maupun kritik yang Anda sampaikan bukan sekadar pesan masuk—melainkan bahan bakar utama bagi kami untuk merilis pembaruan yang lebih stabil, fungsional, dan nyaman digunakan setiap hari.
+            Setiap saran, laporan kendala, maupun kritik yang Anda sampaikan bukan sekadar pesan masuk—melainkan bahan
+            bakar utama bagi kami untuk merilis pembaruan yang lebih stabil, fungsional, dan nyaman digunakan setiap
+            hari.
           </p>
 
           <div class="feedback-pillars">
@@ -1878,7 +1900,8 @@
               <div class="pillar-icon">💡</div>
               <div>
                 <strong>Punya Ide Fitur Baru?</strong>
-                <div style="font-size: 13px; color: #64748B;">Sampaikan fitur atau alur kerja yang menurut Anda bisa membuat Pulse semakin membantu.</div>
+                <div style="font-size: 13px; color: #64748B;">Sampaikan fitur atau alur kerja yang menurut Anda bisa
+                  membuat Pulse semakin membantu.</div>
               </div>
             </div>
 
@@ -1886,7 +1909,8 @@
               <div class="pillar-icon">🐞</div>
               <div>
                 <strong>Menemukan Kendala atau Bug?</strong>
-                <div style="font-size: 13px; color: #64748B;">Beri tahu kami jenis perangkat dan langkah kejadiannya agar segera kami perbaiki.</div>
+                <div style="font-size: 13px; color: #64748B;">Beri tahu kami jenis perangkat dan langkah kejadiannya
+                  agar segera kami perbaiki.</div>
               </div>
             </div>
 
@@ -1894,14 +1918,17 @@
               <div class="pillar-icon">💬</div>
               <div>
                 <strong>Kritik & Masukan Terbuka</strong>
-                <div style="font-size: 13px; color: #64748B;">Ulasan jujur Anda tentang tampilan, alur penggunaan, dan kenyamanan sangat kami hargai.</div>
+                <div style="font-size: 13px; color: #64748B;">Ulasan jujur Anda tentang tampilan, alur penggunaan, dan
+                  kenyamanan sangat kami hargai.</div>
               </div>
             </div>
           </div>
 
-          <div style="display: flex; gap: 14px; flex-wrap: wrap; align-items: center; font-size: 13.5px; color: #64748B; border-top: 1px solid var(--border-color); padding-top: 18px;">
+          <div
+            style="display: flex; gap: 14px; flex-wrap: wrap; align-items: center; font-size: 13.5px; color: #64748B; border-top: 1px solid var(--border-color); padding-top: 18px;">
             <div style="display: flex; align-items: center; gap: 8px;">
-              <span style="width: 10px; height: 10px; border-radius: 50%; background: #10B981; display: inline-block;"></span>
+              <span
+                style="width: 10px; height: 10px; border-radius: 50%; background: #10B981; display: inline-block;"></span>
               <span>Aktif Dikembangkan & Diperbarui Rutin</span>
             </div>
             <span>•</span>
@@ -1936,17 +1963,25 @@
 
             <div class="form-group">
               <label class="form-label">Pesan, Kritik, atau Ide Anda</label>
-              <textarea id="feedback-message" class="form-textarea" placeholder="Tuliskan pengalaman Anda, apa yang perlu ditingkatkan, atau ide fitur yang Anda inginkan..." required></textarea>
+              <textarea id="feedback-message" class="form-textarea"
+                placeholder="Tuliskan pengalaman Anda, apa yang perlu ditingkatkan, atau ide fitur yang Anda inginkan..."
+                required></textarea>
             </div>
 
-            <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; padding: 12px; border: none; cursor: pointer; font-size: 14.5px;">
+            <button type="submit" class="btn-primary"
+              style="width: 100%; justify-content: center; padding: 12px; border: none; cursor: pointer; font-size: 14.5px;">
               <span>Kirim Masukan ke Pengembang</span>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+              </svg>
             </button>
           </form>
 
           <div style="margin-top: 14px; text-align: center; font-size: 12.5px; color: var(--text-muted);">
-            Atau kontak langsung: <a href="mailto:info@kodeeweb.com" style="color: var(--brand-deep-teal); font-weight: 700; text-decoration: none;">info@kodeeweb.com</a>
+            Atau kontak langsung: <a href="mailto:info@kodeeweb.com"
+              style="color: var(--brand-deep-teal); font-weight: 700; text-decoration: none;">info@kodeeweb.com</a>
           </div>
         </div>
       </div>
@@ -2124,6 +2159,36 @@
       const body = encodeURIComponent(`Halo Jacky (Developer Pulse),\n\nJenis Masukan: ${type}\nDari: ${name}\n\nPesan / Kritik & Saran:\n${msg}\n\n--\nDikirim melalui pulse.kodeeweb.com`);
 
       window.location.href = `mailto:info@kodeeweb.com?cc=jackyandrazat@gmail.com&subject=${subject}&body=${body}`;
+    }
+
+    // QR Tab Switcher (Expo vs Direct APK)
+    function switchQrTab(mode) {
+      const expoBtn = document.getElementById('qr-tab-expo');
+      const directBtn = document.getElementById('qr-tab-direct');
+      const qrLink = document.getElementById('qr-link');
+      const qrImg = document.getElementById('qr-img');
+      const qrCaption = document.getElementById('qr-caption');
+      const qrDirectLink = document.getElementById('qr-direct-link');
+
+      if (!expoBtn || !directBtn || !qrLink || !qrImg) return;
+
+      if (mode === 'expo') {
+        expoBtn.classList.add('active');
+        directBtn.classList.remove('active');
+        qrLink.href = 'https://expo.dev/accounts/jackyandrazat/projects/pulse-app/builds/c27d4d22-4673-467f-80f9-c2b98018e630';
+        qrImg.src = '/qr-expo.png';
+        qrCaption.textContent = 'Pindai kamera untuk membuka halaman instalasi Expo Build';
+        qrDirectLink.innerHTML = '<span>🌐 Buka Halaman Expo</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>';
+        qrDirectLink.href = 'https://expo.dev/accounts/jackyandrazat/projects/pulse-app/builds/c27d4d22-4673-467f-80f9-c2b98018e630';
+      } else {
+        directBtn.classList.add('active');
+        expoBtn.classList.remove('active');
+        qrLink.href = '/download/pulse-latest.apk';
+        qrImg.src = '/qr-direct.png';
+        qrCaption.textContent = 'Pindai kamera untuk langsung unduh APK ke smartphone';
+        qrDirectLink.innerHTML = '<span>📥 Unduh pulse-latest.apk</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>';
+        qrDirectLink.href = '/download/pulse-latest.apk';
+      }
     }
   </script>
 
