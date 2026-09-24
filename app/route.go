@@ -6,6 +6,8 @@ import (
 	"go-todo-api/middleware"
 	"go-todo-api/response"
 
+	"os"
+
 	"github.com/gin-gonic/gin"
 
 	_ "go-todo-api/docs"
@@ -38,6 +40,13 @@ func SetupRouter(r *gin.Engine) *gin.Engine {
 	r.StaticFile("/privacy.html", "./public/privacy.html")
 	r.StaticFile("/terms", "./public/terms.html")
 	r.StaticFile("/terms.html", "./public/terms.html")
+	r.GET("/download/pulse-latest.apk", func(c *gin.Context) {
+		if _, err := os.Stat("./public/download/pulse-latest.apk"); err == nil {
+			c.File("./public/download/pulse-latest.apk")
+			return
+		}
+		c.Redirect(302, "https://expo.dev/artifacts/eas/kZsvVWVulEtE7YTZIQZC6_4NlhxqBELOjViSe8I_MtQ.apk")
+	})
 	r.Static("/download", "./public/download")
 
 	r.GET("/ready", func(c *gin.Context) {
