@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kebijakan Privasi - Pulse App</title>
+  <meta name="description"
+    content="Kebijakan Privasi resmi aplikasi Pulse. Pelajari bagaimana kami mengumpulkan, menggunakan, dan melindungi data pribadi, tugas, dan keuangan Anda.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --brand-deep-teal: #34908B;
+      --brand-fresh-teal: #6FBFB2;
+      --brand-soft-mint: #A5E9DD;
+      --brand-butter-yellow: #FDF4AF;
+      --primary-dark: #123432;
+      --text-main: #1E293B;
+      --text-secondary: #64748B;
+      --bg-page: #F8FAF9;
+      --bg-surface: #FFFFFF;
+      --border-color: #E2E8F0;
+      --card-shadow: 0 4px 20px -2px rgba(52, 144, 139, 0.08), 0 2px 6px -1px rgba(0, 0, 0, 0.04);
+      --radius-lg: 18px;
+      --radius-md: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Header Nav */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      padding: 16px 24px;
+    }
+
+    .nav-container {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--brand-deep-teal), var(--brand-fresh-teal));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 10px rgba(52, 144, 139, 0.3);
+      color: #FFFFFF;
+      font-weight: 800;
+      font-size: 20px;
+    }
+
+    .logo-text {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--primary-dark);
+      letter-spacing: -0.5px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 8px;
+    }
+
+    .nav-btn {
+      padding: 8px 16px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+
+    .nav-btn.active {
+      background: var(--brand-deep-teal);
+      color: #FFFFFF;
+    }
+
+    .nav-btn:not(.active) {
+      color: var(--text-secondary);
+      background: #F1F5F9;
+    }
+
+    .nav-btn:not(.active):hover {
+      background: #E2E8F0;
+      color: var(--text-main);
+    }
+
+    /* Main Container */
+    main {
+      max-width: 900px;
+      margin: 40px auto 80px;
+      padding: 0 24px;
+    }
+
+    /* Hero Card */
+    .hero-card {
+      background: linear-gradient(135deg, #1A4C49 0%, #2B7B77 100%);
+      color: #FFFFFF;
+      border-radius: 24px;
+      padding: 40px;
+      margin-bottom: 32px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 12px 32px -4px rgba(26, 76, 73, 0.25);
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(253, 244, 175, 0.2);
+      border: 1px solid rgba(253, 244, 175, 0.4);
+      color: var(--brand-butter-yellow);
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
+    }
+
+    .hero-title {
+      font-size: 32px;
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 12px;
+    }
+
+    .hero-meta {
+      font-size: 14px;
+      color: var(--brand-soft-mint);
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    /* Content Card */
+    .content-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 24px;
+      padding: 40px;
+      box-shadow: var(--card-shadow);
+    }
+
+    .table-of-contents {
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-radius: var(--radius-md);
+      padding: 24px;
+      margin-bottom: 36px;
+    }
+
+    .toc-title {
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+    }
+
+    .toc-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 8px 16px;
+    }
+
+    .toc-link {
+      color: var(--brand-deep-teal);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      transition: color 0.15s;
+    }
+
+    .toc-link:hover {
+      text-decoration: underline;
+      color: #226360;
+    }
+
+    .section {
+      margin-bottom: 36px;
+    }
+
+    .section-title {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-num {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: #E8F5F4;
+      color: var(--brand-deep-teal);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+
+    .section p {
+      margin-bottom: 14px;
+      color: #334155;
+      font-size: 15px;
+    }
+
+    .section ul {
+      margin-left: 20px;
+      margin-bottom: 14px;
+    }
+
+    .section li {
+      margin-bottom: 8px;
+      font-size: 15px;
+      color: #334155;
+    }
+
+    .highlight-box {
+      background: #F0FAF8;
+      border-left: 4px solid var(--brand-deep-teal);
+      padding: 16px 20px;
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      margin: 18px 0;
+    }
+
+    .highlight-box p {
+      margin-bottom: 0;
+      color: #1A4C49;
+      font-weight: 500;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 32px 24px;
+      color: var(--text-secondary);
+      font-size: 14px;
+      border-top: 1px solid var(--border-color);
+    }
+
+    footer a {
+      color: var(--brand-deep-teal);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    @media (max-width: 640px) {
+      .hero-card {
+        padding: 28px 20px;
+      }
+
+      .hero-title {
+        font-size: 24px;
+      }
+
+      .content-card {
+        padding: 24px 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navigation Header -->
+  <header>
+    <div class="nav-container">
+      <a href="#" class="brand-logo">
+        <div class="logo-icon">P</div>
+        <span class="logo-text">Pulse</span>
+      </a>
+      <div class="nav-links">
+        <a href="privacy.html" class="nav-btn active">Kebijakan Privasi</a>
+        <a href="terms.html" class="nav-btn">Ketentuan Layanan</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <div class="hero-card">
+      <div class="hero-badge">Dokumen Resmi</div>
+      <h1 class="hero-title">Kebijakan Privasi Pulse</h1>
+      <div class="hero-meta">
+        <span>Berlaku sejak: 1 September 2026</span>
+        <span>•</span>
+        <span>Terakhir diperbarui: 24 September 2026</span>
+      </div>
+    </div>
+
+    <div class="content-card">
+      <p style="font-size: 16px; margin-bottom: 24px; color: #475569;">
+        Selamat datang di <strong>Pulse</strong> ("Aplikasi", "Kami"). Kami sangat menghargai privasi Anda dan
+        berkomitmen untuk melindungi data pribadi yang Anda percayakan kepada kami. Kebijakan Privasi ini menjelaskan
+        bagaimana kami mengumpulkan, menggunakan, menyimpan, dan melindungi informasi Anda saat menggunakan aplikasi
+        Pulse.
+      </p>
+
+      <!-- Table of Contents -->
+      <div class="table-of-contents">
+        <div class="toc-title">Daftar Isi</div>
+        <ul class="toc-list">
+          <li><a href="#informasi-dikumpulkan" class="toc-link">1. Informasi yang Kami Kumpulkan</a></li>
+          <li><a href="#penggunaan-informasi" class="toc-link">2. Cara Kami Menggunakan Data</a></li>
+          <li><a href="#keamanan-data" class="toc-link">3. Keamanan & Penyimpanan Data</a></li>
+          <li><a href="#izin-perangkat" class="toc-link">4. Izin Perangkat Seluler</a></li>
+          <li><a href="#hak-pengguna" class="toc-link">5. Hak Pengguna & Hapus Akun</a></li>
+          <li><a href="#pihak-ketiga" class="toc-link">6. Layanan Pihak Ketiga</a></li>
+          <li><a href="#perubahan-kebijakan" class="toc-link">7. Perubahan Kebijakan Privasi</a></li>
+          <li><a href="#kontak" class="toc-link">8. Kontak & Dukungan</a></li>
+        </ul>
+      </div>
+
+      <!-- Section 1 -->
+      <div class="section" id="informasi-dikumpulkan">
+        <h2 class="section-title"><span class="section-num">1</span> Informasi yang Kami Kumpulkan</h2>
+        <p>Kami mengumpulkan informasi yang Anda berikan secara langsung saat membuat akun dan menggunakan fitur
+          aplikasi Pulse:</p>
+        <ul>
+          <li><strong>Data Akun:</strong> Nama, alamat email, username, dan kata sandi yang di-hash (menggunakan algoritma bcrypt, tidak pernah disimpan dalam teks biasa).</li>
+          <li><strong>Data Produktivitas:</strong> Daftar tugas (Todos), catatan pribadi (Notes), dan kebiasaan harian
+            (Habits serta streak).</li>
+          <li><strong>Data Keuangan Pribadi:</strong> Catatan transaksi pemasukan dan pengeluaran, kategori transaksi,
+            batas anggaran bulanan (Budgets), serta transaksi berulang.</li>
+          <li><strong>Data Teknis & Sesi:</strong> Alamat IP, jenis perangkat, User-Agent, serta token sesi (JWT) untuk
+            memverifikasi autentikasi Anda secara aman.</li>
+        </ul>
+      </div>
+
+      <!-- Section 2 -->
+      <div class="section" id="penggunaan-informasi">
+        <h2 class="section-title"><span class="section-num">2</span> Cara Kami Menggunakan Data Anda</h2>
+        <p>Informasi yang dikumpulkan digunakan semata-mata untuk menyediakan dan meningkatkan fungsionalitas aplikasi
+          Pulse, meliputi:</p>
+        <ul>
+          <li>Menyediakan sinkronisasi data secara real-time antara aplikasi mobile dan server database akun Anda.
+          </li>
+          <li>Menghitung ringkasan produktivitas (tugas selesai, streak kebiasaan) dan analitik keuangan bulanan.</li>
+          <li>Mengirimkan notifikasi pengingat tenggat waktu tugas dan peringatan cerdas apabila pengeluaran mendekati
+            atau melebihi batas anggaran (Budget Alert).</li>
+          <li>Memelihara integritas, stabilitas, dan keamanan sesi akun Anda dari akses yang tidak sah.</li>
+        </ul>
+        <div class="highlight-box">
+          <p>Kami <strong>tidak pernah menjual, menyewakan, atau memperdagangkan</strong> data pribadi, catatan, maupun
+            riwayat keuangan Anda kepada pihak ketiga atau pengiklan mana pun.</p>
+        </div>
+      </div>
+
+      <!-- Section 3 -->
+      <div class="section" id="keamanan-data">
+        <h2 class="section-title"><span class="section-num">3</span> Keamanan & Penyimpanan Data</h2>
+        <p>Kami menerapkan langkah-langkah pengamanan yang wajar dan sesuai standar untuk melindungi data Anda:</p>
+        <ul>
+          <li><strong>Pengamanan Kata Sandi (Bcrypt):</strong> Kata sandi Anda tidak pernah disimpan dalam bentuk teks biasa (plain text), melainkan di-hash satu arah menggunakan algoritma kriptografi bcrypt.</li>
+          <li><strong>Koneksi Jaringan Aman (HTTPS/TLS):</strong> Pertukaran data antara aplikasi mobile dan server backend dilindungi oleh protokol HTTPS/TLS untuk mencegah penyadapan data di jaringan.</li>
+          <li><strong>Autentikasi Berbasis Token (JWT):</strong> Sesi login diverifikasi menggunakan JSON Web Token (JWT) yang memiliki batas waktu kedaluwarsa serta perlindungan refresh token revocation.</li>
+          <li><strong>Penyimpanan Lokal:</strong> Di ponsel Anda, data offline disimpan menggunakan penyimpanan lokal aplikasi (AsyncStorage) untuk kemudahan akses saat offline.</li>
+        </ul>
+      </div>
+
+      <!-- Section 4 -->
+      <div class="section" id="izin-perangkat">
+        <h2 class="section-title"><span class="section-num">4</span> Izin Perangkat Seluler</h2>
+        <p>Aplikasi Pulse mungkin meminta izin opsional berikut untuk mengaktifkan fitur tertentu:</p>
+        <ul>
+          <li><strong>Notifikasi (Push Notifications):</strong> Digunakan untuk menampilkan pengingat tugas harian dan
+            notifikasi peringatan anggaran di status bar perangkat Anda.</li>
+          <li><strong>Kamera & Galeri Foto (Opsional):</strong> Digunakan secara lokal saat Anda memotret atau memilih
+            gambar struk/bukti transaksi untuk dipindai ke dalam catatan transaksi. Gambar tidak dibagikan ke publik.
+          </li>
+        </ul>
+      </div>
+
+      <!-- Section 5 -->
+      <div class="section" id="hak-pengguna">
+        <h2 class="section-title"><span class="section-num">5</span> Hak Pengguna & Penghapusan Akun</h2>
+        <p>Anda memiliki kendali penuh atas data pribadi Anda di Pulse:</p>
+        <ul>
+          <li><strong>Akses & Pembaruan:</strong> Anda dapat melihat dan mengubah informasi profil (nama, username, kata
+            sandi) langsung di menu Profil aplikasi.</li>
+          <li><strong>Penghapusan Akun Permanen (Right to be Forgotten):</strong> Anda dapat menghapus akun Anda kapan
+            saja melalui menu <em>Profil &gt; Hapus Akun</em>. Ketika Anda menghapus akun, seluruh data Anda (pengguna,
+            tugas, catatan, kebiasaan, transaksi, anggaran, dan sesi) akan <strong>dihapus secara permanen</strong> dari
+            basis data kami melalui transaksi atomik dan tidak dapat dipulihkan kembali.</li>
+        </ul>
+      </div>
+
+      <!-- Section 6 -->
+      <div class="section" id="pihak-ketiga">
+        <h2 class="section-title"><span class="section-num">6</span> Layanan Pihak Ketiga</h2>
+        <p>Aplikasi Pulse dibangun menggunakan infrastruktur terpercaya seperti Expo / React Native dan basis data
+          PostgreSQL. Layanan ini tunduk pada kebijakan privasi dan standar keamanan data masing-masing penyedia
+          infrastruktur yang bereputasi tinggi.</p>
+      </div>
+
+      <!-- Section 7 -->
+      <div class="section" id="perubahan-kebijakan">
+        <h2 class="section-title"><span class="section-num">7</span> Perubahan Kebijakan Privasi</h2>
+        <p>Kami dapat memperbarui Kebijakan Privasi ini dari waktu ke waktu untuk mencerminkan pembaruan fitur atau
+          kepatuhan regulasi. Setiap pembaruan akan dipublikasikan di halaman ini dengan tanggal "Terakhir diperbarui"
+          yang disesuaikan.</p>
+      </div>
+
+      <!-- Section 8 -->
+      <div class="section" id="kontak">
+        <h2 class="section-title"><span class="section-num">8</span> Kontak & Dukungan</h2>
+        <p>Jika Anda memiliki pertanyaan, saran, atau permintaan terkait kebijakan privasi dan perlindungan data pribadi
+          Anda di Pulse, silakan hubungi tim kami melalui:</p>
+        <ul>
+          <li><strong>Email Pengembang:</strong> info@kodeeweb.com / jackyandrazat@gmail.com</li>
+          <li><strong>Website:</strong> <a href="https://pulse.kodeeweb.com" target="_blank"
+              style="color: var(--brand-deep-teal); font-weight: 600;">https://pulse.kodeeweb.com</a></li>
+        </ul>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 Pulse App. Hak Cipta Dilindungi Undang-Undang.</p>
+    <p style="margin-top: 6px;">
+      <a href="privacy">Kebijakan Privasi</a> • <a href="terms">Ketentuan Layanan</a>
+    </p>
+  </footer>
+
+</body>
+
+</html>

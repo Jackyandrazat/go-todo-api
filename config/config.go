@@ -16,6 +16,7 @@ type AppConfig struct {
 	DBUser         string
 	DBPassword     string
 	DBName         string
+	DBSSLMode      string
 	JWTSecret      string
 	JWTAccessExp   time.Duration
 	JWTRefreshExp  time.Duration
@@ -24,6 +25,7 @@ type AppConfig struct {
 	TestDBUser     string
 	TestDBPassword string
 	TestDBName     string
+	TestDBSSLMode  string
 }
 
 var Config AppConfig
@@ -52,6 +54,7 @@ func LoadConfig() {
 		DBUser:        getEnv("DB_USER", ""),
 		DBPassword:    getEnv("DB_PASSWORD", ""),
 		DBName:        getEnv("DB_NAME", ""),
+		DBSSLMode:     getEnv("DB_SSLMODE", "disable"),
 		JWTSecret:     getEnv("JWT_SECRET", "super-secret-secret-change-this"),
 		JWTAccessExp:  parseDuration(getEnv("JWT_ACCESS_EXP", "15m")),
 		JWTRefreshExp: parseDuration(getEnv("JWT_REFRESH_EXP", "168h")),
@@ -61,6 +64,7 @@ func LoadConfig() {
 		TestDBUser:     getEnv("TEST_DB_USER", ""),
 		TestDBPassword: getEnv("TEST_DB_PASSWORD", ""),
 		TestDBName:     getEnv("TEST_DB_NAME", ""),
+		TestDBSSLMode:  getEnv("TEST_DB_SSLMODE", "disable"),
 	}
 }
 

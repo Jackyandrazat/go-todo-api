@@ -27,8 +27,18 @@ func SetupRouter(r *gin.Engine) *gin.Engine {
 	budgetHandler := handler.NewBudgetHandler()
 	recurringHandler := handler.NewRecurringTransactionHandler()
 	alertHandler := handler.NewAlertHandler()
+	habitHandler := handler.NewHabitHandler()
 
 	r.GET("/api/docs/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+
+	// Static Pages & Downloads (Landing Page, Privacy Policy, Terms of Service & APK)
+	r.StaticFile("/", "./public/index.html")
+	r.StaticFile("/index.html", "./public/index.html")
+	r.StaticFile("/privacy", "./public/privacy.html")
+	r.StaticFile("/privacy.html", "./public/privacy.html")
+	r.StaticFile("/terms", "./public/terms.html")
+	r.StaticFile("/terms.html", "./public/terms.html")
+	r.Static("/download", "./public/download")
 
 	r.GET("/ready", func(c *gin.Context) {
 		sqlDB, err := config.DB.DB()
@@ -90,6 +100,7 @@ func SetupRouter(r *gin.Engine) *gin.Engine {
 		profile.GET("", profileHandler.GetProfile)
 		profile.PATCH("", profileHandler.UpdateProfile)
 		profile.PATCH("/password", profileHandler.ChangePassword)
+		profile.DELETE("", profileHandler.DeleteAccount)
 	}
 
 	transactions := r.Group("/transactions")
@@ -141,6 +152,15 @@ func SetupRouter(r *gin.Engine) *gin.Engine {
 		alerts.GET("", alertHandler.GetAlerts)
 		alerts.PATCH("/:id/read", alertHandler.MarkAsRead)
 		alerts.DELETE("/:id", alertHandler.DeleteAlert)
+	}
+
+	habits := r.Group("/habits")
+	habits.Use(middleware.AuthMiddleware())
+	{
+		habits.GET("", habitHandler.GetHabits)
+		habits.POST("", habitHandler.CreateHabit)
+		habits.POST("/:id/toggle", habitHandler.ToggleHabit)
+		habits.DELETE("/:id", habitHandler.DeleteHabit)
 	}
 
 	return r

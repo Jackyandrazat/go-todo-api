@@ -3,13 +3,16 @@ package handler
 import (
 	"net/http"
 
+	"go-todo-api/config"
 	"go-todo-api/dto"
+	"go-todo-api/model"
 	"go-todo-api/response"
 	"go-todo-api/service"
 	"go-todo-api/utils"
 
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator/v10"
+	"gorm.io/gorm"
 )
 
 type ProfileHandler struct {
@@ -177,4 +180,35 @@ func (h *ProfileHandler) ChangePassword(c *gin.Context) {
 		"password changed successfully",
 		nil,
 	)
+}
+
+func (h *ProfileHandler) DeleteAccount(c *gin.Context) {
+	userIDRaw, exists := c.Get("user_id")
+	if !exists {
+		response.Error(c, http.StatusUnauthorized, "user context missing", nil)
+		return
+	}
+	userID := userIDRaw.(uint)
+
+	// Hapus seluruh data user dalam satu transaksi
+	err := config.DB.Transaction(func(tx *gorm.DB) error {
+		tx.Where("user_id = ?", userID).Delete(&model.Todo{})
+		tx.Where("user_id = ?", userID).Delete(&model.Note{})
+		tx.Where("user_id = ?", userID).Delete(&model.Transaction{})
+		tx.Where("user_id = ?", userID).Delete(&model.TransactionCategory{})
+		tx.Where("user_id = ?", userID).Delete(&model.Budget{})
+		tx.Where("user_id = ?", userID).Delete(&model.RecurringTransaction{})
+		tx.Where("user_id = ?", userID).Delete(&model.Alert{})
+		tx.Where("user_id = ?", userID).Delete(&model.UserSession{})
+		tx.Where("user_id = ?", userID).Delete(&model.Habit{})
+		tx.Where("user_id = ?", userID).Delete(&model.HabitLog{})
+		return tx.Delete(&model.User{}, userID).Error
+	})
+
+	if err != nil {
+		response.InternalServerError(c, "failed to delete account")
+		return
+	}
+
+	response.Success(c, http.StatusOK, "account deleted successfully", nil)
 }

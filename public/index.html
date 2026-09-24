@@ -1,0 +1,2132 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pulse — Personal Productivity & Finance App</title>
+  <meta name="description"
+    content="Pulse adalah aplikasi cerdas all-in-one untuk mengelola tugas harian, pelacak kebiasaan (habit tracker), catatan ide, serta pembukuan & batas anggaran keuangan pribadi.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --brand-deep-teal: #34908B;
+      --brand-fresh-teal: #6FBFB2;
+      --brand-soft-mint: #A5E9DD;
+      --brand-butter-yellow: #FDF4AF;
+      --primary-dark: #0F2D2B;
+      --secondary-dark: #1A4744;
+      --text-main: #0F172A;
+      --text-muted: #64748B;
+      --text-light: #F1F5F9;
+      --bg-page: #F8FAF9;
+      --bg-surface: #FFFFFF;
+      --border-color: #E2E8F0;
+      --card-shadow: 0 10px 30px -5px rgba(52, 144, 139, 0.08), 0 4px 12px -2px rgba(0, 0, 0, 0.03);
+      --card-hover-shadow: 0 20px 40px -10px rgba(52, 144, 139, 0.18), 0 6px 16px -2px rgba(0, 0, 0, 0.05);
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Container helper */
+    .container {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Header Nav */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+      transition: all 0.3s ease;
+    }
+
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 74px;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .logo-badge {
+      width: 42px;
+      height: 42px;
+      border-radius: 13px;
+      background: linear-gradient(135deg, var(--brand-deep-teal), var(--brand-fresh-teal));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 16px rgba(52, 144, 139, 0.35);
+      color: #FFFFFF;
+      font-weight: 800;
+      font-size: 22px;
+      position: relative;
+    }
+
+    .pulse-dot {
+      position: absolute;
+      top: -2px;
+      right: -2px;
+      width: 10px;
+      height: 10px;
+      background-color: var(--brand-butter-yellow);
+      border: 2px solid #FFFFFF;
+      border-radius: 50%;
+      animation: pulseAnim 2s infinite ease-in-out;
+    }
+
+    @keyframes pulseAnim {
+
+      0%,
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+
+      50% {
+        transform: scale(1.3);
+        opacity: 0.7;
+      }
+    }
+
+    .brand-title {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--primary-dark);
+      letter-spacing: -0.5px;
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      color: var(--text-muted);
+      font-size: 14.5px;
+      font-weight: 600;
+      transition: color 0.2s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--brand-deep-teal);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-secondary {
+      padding: 9px 18px;
+      border-radius: 999px;
+      background: #EDF7F5;
+      color: var(--brand-deep-teal);
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      border: 1px solid rgba(52, 144, 139, 0.2);
+    }
+
+    .btn-secondary:hover {
+      background: #D8F0EC;
+    }
+
+    .btn-primary {
+      padding: 10px 22px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--brand-deep-teal), #2A7974);
+      color: #FFFFFF;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 4px 14px rgba(52, 144, 139, 0.35);
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(52, 144, 139, 0.45);
+    }
+
+    /* Mobile hamburger */
+    .mobile-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      color: var(--primary-dark);
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      padding: 80px 0 90px;
+      overflow: hidden;
+      background: radial-gradient(circle at 85% 20%, rgba(165, 233, 221, 0.4) 0%, transparent 45%),
+        radial-gradient(circle at 15% 75%, rgba(253, 244, 175, 0.35) 0%, transparent 50%);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      align-items: center;
+      gap: 60px;
+    }
+
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: #E8F6F4;
+      border: 1px solid rgba(52, 144, 139, 0.3);
+      color: var(--brand-deep-teal);
+      font-size: 13.5px;
+      font-weight: 700;
+      margin-bottom: 24px;
+    }
+
+    .hero-heading {
+      font-size: 50px;
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -1.5px;
+      color: var(--primary-dark);
+      margin-bottom: 20px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, var(--brand-deep-teal) 0%, #175450 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-sub {
+      font-size: 18px;
+      color: var(--text-muted);
+      line-height: 1.65;
+      margin-bottom: 36px;
+      max-width: 540px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+
+    .btn-hero {
+      padding: 14px 28px;
+      font-size: 15.5px;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 32px;
+      border-top: 1px solid var(--border-color);
+      padding-top: 24px;
+    }
+
+    .stat-item h4 {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--primary-dark);
+      line-height: 1.1;
+    }
+
+    .stat-item p {
+      font-size: 13px;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    /* Hero Mockup Preview */
+    .mockup-container {
+      position: relative;
+    }
+
+    .phone-card {
+      background: linear-gradient(160deg, #103230 0%, #1A4744 100%);
+      border-radius: var(--radius-xl);
+      padding: 28px;
+      box-shadow: 0 25px 60px -15px rgba(15, 45, 43, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.1);
+      color: #FFFFFF;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .phone-card::before {
+      content: "";
+      position: absolute;
+      top: -60px;
+      right: -60px;
+      width: 180px;
+      height: 180px;
+      background: radial-gradient(circle, rgba(165, 233, 221, 0.25) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .mockup-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 22px;
+    }
+
+    .mockup-greeting {
+      font-size: 13px;
+      color: var(--brand-soft-mint);
+      font-weight: 600;
+    }
+
+    .mockup-user {
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .mockup-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--brand-butter-yellow), var(--brand-fresh-teal));
+      color: var(--primary-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 15px;
+    }
+
+    /* Mockup Widgets */
+    .widget-budget {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+
+    .widget-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .widget-label {
+      font-size: 12px;
+      color: #CBD5E1;
+      font-weight: 600;
+    }
+
+    .widget-value {
+      font-size: 19px;
+      font-weight: 800;
+      color: var(--brand-butter-yellow);
+    }
+
+    .progress-bar-bg {
+      height: 7px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      width: 68%;
+      background: linear-gradient(90deg, var(--brand-fresh-teal), var(--brand-butter-yellow));
+      border-radius: 999px;
+    }
+
+    .widget-task-item {
+      background: #FFFFFF;
+      color: var(--text-main);
+      border-radius: 12px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      transition: transform 0.2s ease;
+    }
+
+    .widget-task-item:hover {
+      transform: translateX(4px);
+    }
+
+    .check-circle {
+      width: 20px;
+      height: 20px;
+      border-radius: 6px;
+      background: var(--brand-deep-teal);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #FFFFFF;
+      font-size: 12px;
+    }
+
+    .habit-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(253, 244, 175, 0.18);
+      border: 1px solid rgba(253, 244, 175, 0.4);
+      color: var(--brand-butter-yellow);
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    /* Floating Pill Badge */
+    .floating-badge {
+      position: absolute;
+      bottom: -15px;
+      left: -20px;
+      background: #FFFFFF;
+      border-radius: 16px;
+      padding: 12px 18px;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.12);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border: 1px solid var(--border-color);
+      animation: floatSlow 3.5s ease-in-out infinite;
+    }
+
+    @keyframes floatSlow {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+
+    .floating-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: #FEF3C7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    /* Section Styling */
+    section {
+      padding: 90px 0;
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto 56px;
+    }
+
+    .section-tag {
+      display: inline-block;
+      font-size: 12.5px;
+      font-weight: 800;
+      color: var(--brand-deep-teal);
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-size: 36px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      color: var(--primary-dark);
+      line-height: 1.25;
+      margin-bottom: 14px;
+    }
+
+    .section-desc {
+      font-size: 16.5px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* Pillars Bento Grid */
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 24px;
+    }
+
+    .bento-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      box-shadow: var(--card-shadow);
+      transition: all 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .bento-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--card-hover-shadow);
+      border-color: rgba(52, 144, 139, 0.4);
+    }
+
+    .bento-col-7 {
+      grid-column: span 7;
+    }
+
+    .bento-col-5 {
+      grid-column: span 5;
+    }
+
+    .bento-col-4 {
+      grid-column: span 4;
+    }
+
+    .bento-col-8 {
+      grid-column: span 8;
+    }
+
+    .card-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .icon-teal {
+      background: #E6F5F3;
+      color: var(--brand-deep-teal);
+    }
+
+    .icon-yellow {
+      background: #FEF9C3;
+      color: #B45309;
+    }
+
+    .icon-blue {
+      background: #E0F2FE;
+      color: #0369A1;
+    }
+
+    .icon-purple {
+      background: #F3E8FF;
+      color: #7E22CE;
+    }
+
+    .card-title {
+      font-size: 21px;
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin-bottom: 10px;
+      letter-spacing: -0.3px;
+    }
+
+    .card-desc {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 18px;
+    }
+
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag-item {
+      padding: 4px 10px;
+      background: #F1F5F9;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #475569;
+    }
+
+    /* Interactive Showcase Tabs */
+    .interactive-section {
+      background: #FFFFFF;
+      border-top: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .tabs-wrapper {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      padding: 12px 24px;
+      border-radius: 999px;
+      border: 1px solid var(--border-color);
+      background: #F8FAF9;
+      color: var(--text-muted);
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+
+    .tab-btn.active {
+      background: var(--brand-deep-teal);
+      color: #FFFFFF;
+      border-color: var(--brand-deep-teal);
+      box-shadow: 0 4px 12px rgba(52, 144, 139, 0.25);
+    }
+
+    .tab-pane {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .tab-pane.active {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .pane-text h3 {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin-bottom: 16px;
+    }
+
+    .pane-text p {
+      font-size: 16px;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+
+    .pane-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .pane-features li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .pane-features span.bullet {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #D8F0EC;
+      color: var(--brand-deep-teal);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .pane-card-visual {
+      background: #F8FAF9;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 30px;
+      box-shadow: var(--card-shadow);
+    }
+
+    /* Security Highlight Banner */
+    .security-banner {
+      background: linear-gradient(135deg, #103230 0%, #174744 100%);
+      border-radius: var(--radius-xl);
+      padding: 56px 48px;
+      color: #FFFFFF;
+      position: relative;
+      overflow: hidden;
+      margin-top: 20px;
+    }
+
+    .security-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .sec-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(253, 244, 175, 0.2);
+      border: 1px solid rgba(253, 244, 175, 0.35);
+      color: var(--brand-butter-yellow);
+      padding: 4px 14px;
+      border-radius: 999px;
+      font-size: 12.5px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .sec-title {
+      font-size: 32px;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 14px;
+    }
+
+    .sec-desc {
+      font-size: 16px;
+      color: #CBD5E1;
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+
+    .sec-checklist {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .sec-checklist li {
+      font-size: 14px;
+      color: #E2E8F0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Download Section */
+    .download-section {
+      background: radial-gradient(circle at 50% 0%, rgba(165, 233, 221, 0.25) 0%, transparent 60%), #FFFFFF;
+      border-top: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+      position: relative;
+    }
+
+    .download-grid-wrapper {
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 36px;
+      align-items: stretch;
+    }
+
+    .download-main-card {
+      background: linear-gradient(145deg, #103230 0%, #174E4A 100%);
+      color: #FFFFFF;
+      border-radius: var(--radius-xl);
+      padding: 44px 40px;
+      box-shadow: 0 20px 50px -10px rgba(16, 50, 48, 0.35);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .download-main-card::before {
+      content: "";
+      position: absolute;
+      top: -60px;
+      right: -60px;
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(165, 233, 221, 0.3) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .download-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin: 28px 0 24px;
+    }
+
+    .btn-store {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 14px 22px;
+      border-radius: 14px;
+      text-decoration: none;
+      transition: all 0.25s ease;
+      position: relative;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .btn-store-apk {
+      background: linear-gradient(135deg, var(--brand-deep-teal), #236E6A);
+      color: #FFFFFF;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+      border-color: rgba(165, 233, 221, 0.4);
+    }
+
+    .btn-store-apk:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(52, 144, 139, 0.4);
+      background: linear-gradient(135deg, #3CA39E, var(--brand-deep-teal));
+    }
+
+    .btn-store-google {
+      background: rgba(255, 255, 255, 0.08);
+      color: #FFFFFF;
+      backdrop-filter: blur(8px);
+    }
+
+    .btn-store-google:hover {
+      background: rgba(255, 255, 255, 0.16);
+      transform: translateY(-2px);
+    }
+
+    .btn-store-apple {
+      background: rgba(255, 255, 255, 0.04);
+      color: #94A3B8;
+      cursor: not-allowed;
+      border-color: rgba(255, 255, 255, 0.08);
+    }
+
+    .store-icon {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .store-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      opacity: 0.8;
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .store-title {
+      font-size: 17px;
+      font-weight: 800;
+      line-height: 1.1;
+    }
+
+    .store-badge-tag {
+      margin-left: auto;
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-weight: 700;
+    }
+
+    .tag-recommended {
+      background: var(--brand-butter-yellow);
+      color: var(--primary-dark);
+    }
+
+    .tag-soon {
+      background: rgba(255, 255, 255, 0.12);
+      color: #CBD5E1;
+    }
+
+    .apk-specs {
+      font-size: 12.5px;
+      color: var(--brand-soft-mint);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 10px;
+    }
+
+    /* QR Side Card */
+    .download-side-card {
+      background: #F8FAF9;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-xl);
+      padding: 36px 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: var(--card-shadow);
+    }
+
+    .qr-wrapper {
+      text-align: center;
+      margin: 16px 0 20px;
+    }
+
+    .qr-box {
+      width: 170px;
+      height: 170px;
+      margin: 0 auto 12px;
+      background: #FFFFFF;
+      border: 2px solid var(--border-color);
+      border-radius: 16px;
+      padding: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+    }
+
+    .install-steps {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .install-steps li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 13.5px;
+      color: #334155;
+    }
+
+    .step-num {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #D8F0EC;
+      color: var(--brand-deep-teal);
+      font-weight: 800;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    @media (max-width: 992px) {
+      .download-grid-wrapper {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Feedback & Community Section */
+    .feedback-section {
+      background: #FFFFFF;
+      padding: 90px 0;
+      border-top: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+      position: relative;
+    }
+
+    .feedback-card {
+      background: linear-gradient(135deg, #F8FCFB 0%, #EFF9F7 100%);
+      border: 1px solid rgba(52, 144, 139, 0.25);
+      border-radius: var(--radius-xl);
+      padding: 48px;
+      box-shadow: var(--card-shadow);
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .dev-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #E6F5F3;
+      color: var(--brand-deep-teal);
+      border: 1px solid rgba(52, 144, 139, 0.3);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .feedback-title {
+      font-size: 32px;
+      font-weight: 800;
+      line-height: 1.25;
+      color: var(--primary-dark);
+      margin-bottom: 16px;
+    }
+
+    .feedback-desc {
+      font-size: 15.5px;
+      color: #475569;
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    .feedback-pillars {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .pillar-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 14.5px;
+      color: #334155;
+    }
+
+    .pillar-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: #FFFFFF;
+      border: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .feedback-form-box {
+      background: #FFFFFF;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin-bottom: 6px;
+    }
+
+    .form-select, .form-textarea, .form-input {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--border-color);
+      font-family: inherit;
+      font-size: 14px;
+      color: var(--text-main);
+      background: #F8FAF9;
+      transition: all 0.2s ease;
+      box-sizing: border-box;
+    }
+
+    .form-select:focus, .form-textarea:focus, .form-input:focus {
+      outline: none;
+      border-color: var(--brand-deep-teal);
+      background: #FFFFFF;
+      box-shadow: 0 0 0 3px rgba(52, 144, 139, 0.15);
+    }
+
+    .form-textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    @media (max-width: 992px) {
+      .feedback-card {
+        grid-template-columns: 1fr;
+        padding: 32px 24px;
+        gap: 32px;
+      }
+    }
+
+    /* FAQ Accordion */
+    .faq-container {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .faq-item {
+      background: #FFFFFF;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      margin-bottom: 14px;
+      overflow: hidden;
+      transition: all 0.2s ease;
+    }
+
+    .faq-question {
+      padding: 20px 24px;
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--primary-dark);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+    }
+
+    .faq-question:hover {
+      color: var(--brand-deep-teal);
+    }
+
+    .faq-icon {
+      font-size: 20px;
+      font-weight: 600;
+      transition: transform 0.25s ease;
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      background: #FAFDFB;
+      padding: 0 24px;
+      color: var(--text-muted);
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    .faq-item.open .faq-answer {
+      max-height: 250px;
+      padding: 0 24px 20px;
+    }
+
+    .faq-item.open .faq-icon {
+      transform: rotate(45deg);
+    }
+
+    /* Footer */
+    footer {
+      background: #0B2120;
+      color: #94A3B8;
+      padding: 60px 0 32px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.5fr;
+      gap: 40px;
+      margin-bottom: 48px;
+    }
+
+    .footer-brand h3 {
+      color: #FFFFFF;
+      font-size: 22px;
+      font-weight: 800;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .footer-brand p {
+      font-size: 14.5px;
+      line-height: 1.6;
+      max-width: 320px;
+    }
+
+    .footer-col h4 {
+      color: #FFFFFF;
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 18px;
+      letter-spacing: -0.2px;
+    }
+
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-col a {
+      color: #94A3B8;
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.2s ease;
+    }
+
+    .footer-col a:hover {
+      color: var(--brand-soft-mint);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13.5px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-legal-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .footer-legal-links a {
+      color: var(--brand-fresh-teal);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .footer-legal-links a:hover {
+      text-decoration: underline;
+    }
+
+    /* Responsive Queries */
+    @media (max-width: 992px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .bento-col-7,
+      .bento-col-5,
+      .bento-col-8,
+      .bento-col-4 {
+        grid-column: span 12;
+      }
+
+      .tab-pane.active {
+        grid-template-columns: 1fr;
+      }
+
+      .security-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-top {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-menu {
+        display: none;
+      }
+
+      .hero-heading {
+        font-size: 36px;
+      }
+
+      .floating-badge {
+        display: none;
+      }
+
+      .security-banner {
+        padding: 36px 24px;
+      }
+
+      .sec-checklist {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-top {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <header>
+    <div class="container nav-inner">
+      <a href="/" class="brand-logo">
+        <div class="logo-badge">
+          P
+          <span class="pulse-dot"></span>
+        </div>
+        <span class="brand-title">Pulse</span>
+      </a>
+
+      <ul class="nav-menu">
+        <li><a href="#fitur" class="nav-link">Fitur Utama</a></li>
+        <li><a href="#modul" class="nav-link">Modul</a></li>
+        <li><a href="#download" class="nav-link">Download</a></li>
+        <li><a href="#feedback" class="nav-link">Kritik & Saran</a></li>
+        <li><a href="#faq" class="nav-link">FAQ</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="privacy" class="btn-secondary">Privasi</a>
+        <a href="terms" class="btn-secondary">Syarat</a>
+        <a href="#download" class="btn-primary">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          <span>Unduh APK</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <!-- Left Content -->
+      <div>
+        <div class="badge-pill">
+          <span>⚡</span>
+          <span>Personal Productivity & Finance</span>
+        </div>
+        <h1 class="hero-heading">
+          Kelola Rutinitas & Finansial dalam <span class="gradient-text">Satu Irama</span>.
+        </h1>
+        <p class="hero-sub">
+          Pulse menggabungkan manajemen to-do list, habit tracker konsisten, catatan, dan kalkulasi anggaran bulanan ke
+          dalam satu pengalaman seluler yang elegan dan aman.
+        </p>
+
+        <div class="hero-buttons">
+          <a href="#download" class="btn-primary btn-hero">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            <span>Unduh Aplikasi (APK)</span>
+          </a>
+          <a href="#fitur" class="btn-secondary btn-hero">
+            Lihat Fitur
+          </a>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat-item">
+            <h4>4-in-1</h4>
+            <p>Pilar Produktivitas</p>
+          </div>
+          <div class="stat-item">
+            <h4>Bebas Iklan</h4>
+            <p>Fokus Tanpa Distraksi</p>
+          </div>
+          <div class="stat-item">
+            <h4>Real-Time</h4>
+            <p>Sinkronisasi Cepat</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Mockup Visual -->
+      <div class="mockup-container">
+        <div class="phone-card">
+          <div class="mockup-header">
+            <div>
+              <div class="mockup-greeting">Halo Pengguna Pulse 👋</div>
+              <div class="mockup-user">Ringkasan Hari Ini</div>
+            </div>
+            <div class="mockup-avatar">P</div>
+          </div>
+
+          <!-- Budget Card in Phone -->
+          <div class="widget-budget">
+            <div class="widget-row">
+              <span class="widget-label">Sisa Anggaran Bulan Ini</span>
+              <span class="habit-chip">🔥 14 Hari Streak</span>
+            </div>
+            <div class="widget-value">Rp 3.850.000</div>
+            <div
+              style="display: flex; justify-content: space-between; font-size: 11px; color: #CBD5E1; margin: 8px 0 4px;">
+              <span>Terpakai 68%</span>
+              <span>Batas Rp 12.000.000</span>
+            </div>
+            <div class="progress-bar-bg">
+              <div class="progress-bar-fill"></div>
+            </div>
+          </div>
+
+          <!-- Tasks list in Phone -->
+          <div style="font-size: 12.5px; font-weight: 700; color: var(--brand-soft-mint); margin-bottom: 8px;">TUGAS
+            PRIORITAS HARI INI</div>
+          <div class="widget-task-item">
+            <div class="check-circle">✓</div>
+            <div style="flex: 1;">
+              <div style="font-size: 13.5px; font-weight: 700;">Review Pengeluaran Mingguan</div>
+              <div style="font-size: 11.5px; color: #64748B;">Kategori Finansial • Selesai</div>
+            </div>
+          </div>
+
+          <div class="widget-task-item">
+            <div style="width: 20px; height: 20px; border-radius: 6px; border: 2px solid #CBD5E1;"></div>
+            <div style="flex: 1;">
+              <div style="font-size: 13.5px; font-weight: 700;">Latihan Fisik 20 Menit</div>
+              <div style="font-size: 11.5px; color: #64748B;">Target Kebiasaan • Hari ke-14</div>
+            </div>
+          </div>
+
+          <div class="widget-task-item" style="margin-bottom: 0;">
+            <div style="width: 20px; height: 20px; border-radius: 6px; border: 2px solid #CBD5E1;"></div>
+            <div style="flex: 1;">
+              <div style="font-size: 13.5px; font-weight: 700;">Catat Belanja Bulanan</div>
+              <div style="font-size: 11.5px; color: #64748B;">Struk telah difoto • Menunggu log</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Floating Badge -->
+        <div class="floating-badge">
+          <div class="floating-icon">🛡️</div>
+          <div>
+            <div style="font-size: 13.5px; font-weight: 800; color: var(--primary-dark);">Akses Terlindungi</div>
+            <div style="font-size: 11.5px; color: var(--text-muted);">Koneksi HTTPS & Hash Bcrypt</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bento Grid: 4 Core Pillars -->
+  <section id="fitur">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Arsitektur Fitur</span>
+        <h2 class="section-title">Empat Pilar untuk Menjaga Ritme Hidup Anda</h2>
+        <p class="section-desc">Tidak perlu lagi berpindah-pindah banyak aplikasi. Pulse menyederhanakan produktivitas
+          harian dan akuntansi pribadi ke dalam satu alur kerja yang menyatu.</p>
+      </div>
+
+      <div class="bento-grid">
+        <!-- 1. Todos -->
+        <div class="bento-card bento-col-7">
+          <div class="card-icon icon-teal">📋</div>
+          <h3 class="card-title">Manajemen Tugas & Prioritas (To-Do)</h3>
+          <p class="card-desc">Atur tenggat waktu, label prioritas (Tinggi, Sedang, Rendah), dan status penyelesaian
+            tugas dengan filter instan. Dilengkapi pengingat cerdas agar Anda tidak melewatkan komitmen penting.</p>
+          <div class="card-tags">
+            <span class="tag-item">Pengingat Otomatis</span>
+            <span class="tag-item">Skala Prioritas</span>
+            <span class="tag-item">Filter Fleksibel</span>
+          </div>
+        </div>
+
+        <!-- 2. Habits -->
+        <div class="bento-card bento-col-5">
+          <div class="card-icon icon-yellow">🔥</div>
+          <h3 class="card-title">Pelacak Kebiasaan (Habit Tracker)</h3>
+          <p class="card-desc">Bangun rutinitas positif melalui pencatatan streak harian tanpa jeda. Pantau momentum
+            konsistensi Anda secara visual dari hari ke hari.</p>
+          <div class="card-tags">
+            <span class="tag-item">Streak Counter</span>
+            <span class="tag-item">Log Harian</span>
+          </div>
+        </div>
+
+        <!-- 3. Notes -->
+        <div class="bento-card bento-col-4">
+          <div class="card-icon icon-purple">📝</div>
+          <h3 class="card-title">Catatan (Notes)</h3>
+          <p class="card-desc">Tulis ide spontan, draft tulisan, atau rangkuman rapat anda.</p>
+          <div class="card-tags">
+            <span class="tag-item">Draf Cepat</span>
+            <span class="tag-item">Sinkronisasi Cloud</span>
+          </div>
+        </div>
+
+        <!-- 4. Finance & Budgeting -->
+        <div class="bento-card bento-col-8">
+          <div class="card-icon icon-blue">💰</div>
+          <h3 class="card-title">Pencatatan Keuangan & Batas Anggaran Bulanan</h3>
+          <p class="card-desc">Pantau cashflow pemasukan dan pengeluaran secara terperinci. Tetapkan limit pengeluaran
+            per kategori, kelola transaksi berulang (recurring), dan terima peringatan otomatis (*Budget Alert*) sebelum
+            anggaran Anda terlampaui.</p>
+          <div class="card-tags">
+            <span class="tag-item">Analitik Kategori</span>
+            <span class="tag-item">Peringatan Anggaran</span>
+            <span class="tag-item">Transaksi Berulang</span>
+            <span class="tag-item">Pemindai Struk (Scanner)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Tabs Showcase -->
+  <section class="interactive-section" id="modul">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Eksplorasi Modul</span>
+        <h2 class="section-title">Didesain untuk Fokus dan Efisiensi Maksimal</h2>
+        <p class="section-desc">Pilih modul di bawah ini untuk melihat bagaimana Pulse membantu rutinitas harian Anda.
+        </p>
+      </div>
+
+      <div class="tabs-wrapper">
+        <button class="tab-btn active" onclick="switchTab('tab-productivity')">📝 To-Do & Kebiasaan</button>
+        <button class="tab-btn" onclick="switchTab('tab-finance')">💵 Keuangan & Anggaran</button>
+        <button class="tab-btn" onclick="switchTab('tab-security')">🛡️ Keamanan & Privasi</button>
+      </div>
+
+      <!-- Tab 1 -->
+      <div id="tab-productivity" class="tab-pane active">
+        <div class="pane-text">
+          <h3>Bangun Disiplin dengan Ritme yang Terukur</h3>
+          <p>Membantu Anda membedakan mana tugas mendesak dan mana kebiasaan jangka panjang yang ingin dibangun. Tidak
+            ada lagi tugas yang tertinggal di kalender.</p>
+          <ul class="pane-features">
+            <li><span class="bullet">✓</span> Checklist intuitif dengan tanda centang instan</li>
+            <li><span class="bullet">✓</span> Streak tracker dengan penanda api konsistensi</li>
+            <li><span class="bullet">✓</span> Pengelompokan tugas berdasarkan tanggal & kategori</li>
+          </ul>
+        </div>
+        <div class="pane-card-visual">
+          <div style="font-weight: 800; font-size: 16px; margin-bottom: 16px; color: var(--primary-dark);">🎯 Habit
+            Streaks Aktif</div>
+          <div style="display: flex; flex-direction: column; gap: 12px;">
+            <div
+              style="background: #FFFFFF; padding: 14px; border-radius: 12px; border: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <strong style="display: block; font-size: 14px;">Membaca Buku 15 Halaman</strong>
+                <span style="font-size: 12px; color: #64748B;">Target Harian</span>
+              </div>
+              <span
+                style="background: #FEF3C7; color: #92400E; padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 700;">🔥
+                21 Hari</span>
+            </div>
+            <div
+              style="background: #FFFFFF; padding: 14px; border-radius: 12px; border: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <strong style="display: block; font-size: 14px;">Minum Air 2.5 Liter</strong>
+                <span style="font-size: 12px; color: #64748B;">Kesehatan Tubuh</span>
+              </div>
+              <span
+                style="background: #E0F2FE; color: #075985; padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 700;">💧
+                30 Hari</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 2 -->
+      <div id="tab-finance" class="tab-pane">
+        <div class="pane-text">
+          <h3>Kendalikan Arus Kas Tanpa Rasa Cemas</h3>
+          <p>Pencatatan pengeluaran harian tidak harus rumit. Catat pemasukan, belanja harian, langganan bulanan
+            berulang, serta lampirkan foto struk sebagai arsip.</p>
+          <ul class="pane-features">
+            <li><span class="bullet">✓</span> Peringatan cerdas jika budget pengeluaran mendekati 80% & 100%</li>
+            <li><span class="bullet">✓</span> Kategori kustom (Makanan, Transportasi, Hiburan, Tabungan)</li>
+            <li><span class="bullet">✓</span> Pemindai struk (Receipt Scanner) menggunakan kamera lokal</li>
+          </ul>
+        </div>
+        <div class="pane-card-visual">
+          <div style="font-weight: 800; font-size: 16px; margin-bottom: 16px; color: var(--primary-dark);">📊 Ringkasan
+            Anggaran Bulan Ini</div>
+          <div style="background: #FFFFFF; padding: 16px; border-radius: 12px; border: 1px solid var(--border-color);">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+              <span style="font-size: 13px; font-weight: 600; color: #475569;">Alokasi Makanan & Minuman</span>
+              <span style="font-size: 13px; font-weight: 700; color: var(--brand-deep-teal);">Rp 2.100.000 / Rp
+                3.000.000</span>
+            </div>
+            <div class="progress-bar-bg" style="background: #E2E8F0; margin-bottom: 12px;">
+              <div class="progress-bar-fill" style="width: 70%; background: var(--brand-fresh-teal);"></div>
+            </div>
+            <div
+              style="font-size: 12px; color: #166534; background: #DCFCE7; padding: 6px 10px; border-radius: 6px; display: inline-block;">
+              ✓ Pengeluaran masih dalam batas aman
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 3 -->
+      <div id="tab-security" class="tab-pane">
+        <div class="pane-text">
+          <h3>Privasi Terjaga & Kendali Akun di Tangan Anda</h3>
+          <p>Kami meyakini data produktivitas dan finansial Anda adalah catatan pribadi. Pulse dirancang dengan
+            pengelolaan akun yang bersih dan tanpa pelacakan pihak ketiga.</p>
+          <ul class="pane-features">
+            <li><span class="bullet">✓</span> Kata sandi di-hash aman menggunakan algoritma Bcrypt</li>
+            <li><span class="bullet">✓</span> Pertukaran data dilindungi protokol transmisi HTTPS/TLS</li>
+            <li><span class="bullet">✓</span> Hak hapus akun permanen (Right to be Forgotten) satu klik</li>
+          </ul>
+        </div>
+        <div class="pane-card-visual">
+          <div style="font-weight: 800; font-size: 16px; margin-bottom: 16px; color: var(--primary-dark);">🔒 Protokol
+            Keamanan Berlapis</div>
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <div
+              style="background: #FFFFFF; padding: 12px; border-radius: 8px; border-left: 4px solid var(--brand-deep-teal); font-size: 13px;">
+              <strong>Bcrypt Password Hashing:</strong> Kata sandi tidak pernah disimpan dalam plain text.
+            </div>
+            <div
+              style="background: #FFFFFF; padding: 12px; border-radius: 8px; border-left: 4px solid var(--brand-fresh-teal); font-size: 13px;">
+              <strong>JWT Session & Expiry:</strong> Sesi aman dengan token kedaluwarsa berkala.
+            </div>
+            <div
+              style="background: #FFFFFF; padding: 12px; border-radius: 8px; border-left: 4px solid #10B981; font-size: 13px;">
+              <strong>Bebas Iklan & Pelacak:</strong> Kami tidak pernah menjual data Anda ke pengiklan pihak ketiga.
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Security Banner Callout -->
+  <section id="keamanan" style="padding-top: 60px;">
+    <div class="container">
+      <div class="security-banner">
+        <div class="security-grid">
+          <div>
+            <div class="sec-badge">🛡️ Kepatuhan & Transparansi Data</div>
+            <h2 class="sec-title">Privasi & Kontrol Akun Anda Terjaga</h2>
+            <p class="sec-desc">
+              Pulse dibuat sebagai alat bantu produktivitas dan pembukuan mandiri. Kami tidak pernah memonetisasi,
+              menjual, atau memperdagangkan data catatan, tugas, maupun riwayat transaksi Anda ke pihak ketiga atau
+              pengiklan mana pun.
+            </p>
+            <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+              <a href="privacy" class="btn-primary"
+                style="background: var(--brand-butter-yellow); color: var(--primary-dark);">
+                Baca Kebijakan Privasi
+              </a>
+              <a href="terms" class="btn-secondary"
+                style="background: rgba(255, 255, 255, 0.15); color: #FFFFFF; border-color: rgba(255, 255, 255, 0.3);">
+                Ketentuan Layanan
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <ul class="sec-checklist">
+              <li><span style="color: var(--brand-butter-yellow);">✓</span> Koneksi Aman HTTPS/TLS</li>
+              <li><span style="color: var(--brand-butter-yellow);">✓</span> Bcrypt Password Hashing</li>
+              <li><span style="color: var(--brand-butter-yellow);">✓</span> Sesi Login Terverifikasi JWT</li>
+              <li><span style="color: var(--brand-butter-yellow);">✓</span> Penghapusan Akun Penuh</li>
+              <li><span style="color: var(--brand-butter-yellow);">✓</span> Bebas Iklan Pihak Ketiga</li>
+              <li><span style="color: var(--brand-butter-yellow);">✓</span> Transparansi Data Pribadi</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Download Section -->
+  <section id="download" class="download-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Unduh Sekarang</span>
+        <h2 class="section-title">Pasang Pulse di Ponsel Anda</h2>
+        <p class="section-desc">Nikmati kemudahan mengatur to-do list, habit tracker, dan pembukuan finansial langsung
+          dalam genggaman Anda.</p>
+      </div>
+
+      <div class="download-grid-wrapper">
+        <!-- Main Download Options -->
+        <div class="download-main-card">
+          <div>
+            <span class="sec-badge">⚡ Rilis Resmi v1.0.0</span>
+            <h3 style="font-size: 28px; font-weight: 800; margin-bottom: 12px; line-height: 1.25;">
+              Tersedia untuk Android
+            </h3>
+            <p style="color: #CBD5E1; font-size: 15px; line-height: 1.6;">
+              Unduh paket installer APK secara langsung untuk instalasi instan, atau dapatkan melalui Google Play Store.
+            </p>
+
+            <div class="download-buttons">
+              <!-- Direct APK Download Button -->
+              <a href="download/pulse-latest.apk" class="btn-store btn-store-apk" download>
+                <div class="store-icon">
+                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="7 10 12 15 17 10"></polyline>
+                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                  </svg>
+                </div>
+                <div>
+                  <span class="store-label">Instalasi Mandiri (Direkomendasikan)</span>
+                  <div class="store-title">Unduh Android APK Langsung</div>
+                </div>
+                <span class="store-badge-tag tag-recommended">v1.0.0 APK</span>
+              </a>
+
+              <!-- Google Play Store Button -->
+              <a href="https://play.google.com/store/apps/details?id=com.jackyandrazat.pulse" target="_blank"
+                class="btn-store btn-store-google">
+                <div class="store-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                      d="M3.609 1.814L13.793 12 3.61 22.186a2.02 2.02 0 0 1-.61-.954V2.768c.15-.368.368-.707.609-.954zm11.236 11.238l2.25 2.25-11.45 6.471 9.2-8.721zm0-2.104l-9.2-8.72 11.45 6.47-2.25 2.25zm1.484 1.052l3.435-1.942a1.5 1.5 0 0 1 0 2.616l-3.435 1.942-1.39-1.308 1.39-1.308z" />
+                  </svg>
+                </div>
+                <div>
+                  <span class="store-label">Dapatkan di</span>
+                  <div class="store-title">Google Play Store</div>
+                </div>
+                <span class="store-badge-tag tag-soon">Listing Play Store</span>
+              </a>
+
+              <!-- Apple App Store (Coming Soon) -->
+              <div class="btn-store btn-store-apple">
+                <div class="store-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                      d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.61-.75 1.04-1.8 0.92-2.87-.9.04-2 .6-2.63 1.35-.55.63-.98 1.66-.86 2.69 1.01.08 1.96-.53 2.57-1.17z" />
+                  </svg>
+                </div>
+                <div>
+                  <span class="store-label">Apple iOS</span>
+                  <div class="store-title">App Store / TestFlight</div>
+                </div>
+                <span class="store-badge-tag tag-soon">Segera Hadir</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="apk-specs">
+            <span>📦 Ukuran: ~108 MB</span>
+            <span>•</span>
+            <span>📱 Kompatibilitas: Android 8.0 (Oreo) ke atas</span>
+            <span>•</span>
+            <span>🔒 Bebas Iklan & Aman</span>
+          </div>
+        </div>
+
+        <!-- Right Side: QR Code & Quick Installation Guide -->
+        <div class="download-side-card">
+          <div>
+            <h4 style="font-size: 19px; font-weight: 800; color: var(--primary-dark); margin-bottom: 6px;">
+              Scan QR untuk Mengunduh
+            </h4>
+            <p style="font-size: 13.5px; color: var(--text-muted);">
+              Arahkan kamera smartphone Anda ke kode QR di bawah untuk membuka tautan unduhan langsung di perangkat:
+            </p>
+
+            <div class="qr-wrapper">
+              <div class="qr-box">
+                <!-- Clean Modern SVG QR Code Placeholder -->
+                <svg width="140" height="140" viewBox="0 0 100 100" fill="none">
+                  <!-- Outer frame corners -->
+                  <rect x="5" y="5" width="26" height="26" rx="4" stroke="#123432" stroke-width="4" fill="none" />
+                  <rect x="11" y="11" width="14" height="14" rx="2" fill="#34908B" />
+                  <rect x="69" y="5" width="26" height="26" rx="4" stroke="#123432" stroke-width="4" fill="none" />
+                  <rect x="75" y="11" width="14" height="14" rx="2" fill="#34908B" />
+                  <rect x="5" y="69" width="26" height="26" rx="4" stroke="#123432" stroke-width="4" fill="none" />
+                  <rect x="11" y="75" width="14" height="14" rx="2" fill="#34908B" />
+                  <!-- Data Dots Grid -->
+                  <rect x="38" y="8" width="6" height="6" rx="1.5" fill="#123432" />
+                  <rect x="48" y="8" width="6" height="6" rx="1.5" fill="#6FBFB2" />
+                  <rect x="58" y="8" width="6" height="6" rx="1.5" fill="#123432" />
+                  <rect x="38" y="20" width="6" height="6" rx="1.5" fill="#34908B" />
+                  <rect x="48" y="20" width="6" height="6" rx="1.5" fill="#123432" />
+                  <rect x="58" y="20" width="6" height="6" rx="1.5" fill="#6FBFB2" />
+                  <rect x="8" y="38" width="6" height="6" rx="1.5" fill="#6FBFB2" />
+                  <rect x="20" y="38" width="6" height="6" rx="1.5" fill="#123432" />
+                  <rect x="38" y="38" width="24" height="24" rx="5" fill="#FDF4AF" stroke="#34908B" stroke-width="2" />
+                  <!-- Center Pulse 'P' Logo -->
+                  <text x="50" y="55" font-family="'Plus Jakarta Sans', sans-serif" font-weight="900" font-size="16"
+                    fill="#123432" text-anchor="middle">P</text>
+                  <rect x="70" y="38" width="6" height="6" rx="1.5" fill="#123432" />
+                  <rect x="84" y="38" width="6" height="6" rx="1.5" fill="#34908B" />
+                  <rect x="8" y="48" width="6" height="6" rx="1.5" fill="#123432" />
+                  <rect x="20" y="48" width="6" height="6" rx="1.5" fill="#6FBFB2" />
+                  <rect x="70" y="48" width="6" height="6" rx="1.5" fill="#6FBFB2" />
+                  <rect x="84" y="48" width="6" height="6" rx="1.5" fill="#123432" />
+                  <rect x="38" y="70" width="6" height="6" rx="1.5" fill="#123432" />
+                  <rect x="48" y="70" width="6" height="6" rx="1.5" fill="#34908B" />
+                  <rect x="58" y="70" width="6" height="6" rx="1.5" fill="#123432" />
+                  <rect x="70" y="70" width="6" height="6" rx="1.5" fill="#34908B" />
+                  <rect x="84" y="70" width="6" height="6" rx="1.5" fill="#6FBFB2" />
+                  <rect x="38" y="84" width="6" height="6" rx="1.5" fill="#6FBFB2" />
+                  <rect x="48" y="84" width="6" height="6" rx="1.5" fill="#123432" />
+                  <rect x="70" y="84" width="6" height="6" rx="1.5" fill="#123432" />
+                  <rect x="84" y="84" width="6" height="6" rx="1.5" fill="#34908B" />
+                </svg>
+              </div>
+              <span
+                style="font-size: 12px; font-weight: 700; color: var(--brand-deep-teal);">pulse.kodeeweb.com/download</span>
+            </div>
+
+            <!-- 3 Simple Steps -->
+            <div style="font-weight: 700; font-size: 13.5px; color: var(--primary-dark);">Panduan Pemasangan APK:</div>
+            <ul class="install-steps">
+              <li>
+                <span class="step-num">1</span>
+                <span>Klik tombol unduh atau pindai kode QR untuk mengunduh <code>pulse-latest.apk</code>.</span>
+              </li>
+              <li>
+                <span class="step-num">2</span>
+                <span>Buka notifikasi berkas terunduh dan izinkan pemasangan dari sumber ini jika diminta
+                  browser.</span>
+              </li>
+              <li>
+                <span class="step-num">3</span>
+                <span>Buka aplikasi Pulse, masuk atau daftar akun baru, dan mulai kelola hidup Anda!</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Feedback & Community Section (Solo Developer & Continuous Improvement) -->
+  <section id="feedback" class="feedback-section">
+    <div class="container">
+      <div class="feedback-card">
+        <!-- Left: Story & Mission -->
+        <div>
+          <div class="dev-badge">
+            <span>🌱</span>
+            <span>Karya Pengembang Mandiri (Solo Developer)</span>
+          </div>
+          <h2 class="feedback-title">
+            Pulse Terus Bertumbuh.<br>
+            <span style="color: var(--brand-deep-teal);">Bantu Kami Membangun Lebih Baik.</span>
+          </h2>
+          <p class="feedback-desc">
+            Pulse dirilis dan dikembangkan secara independen oleh satu orang pengembang. Kami percaya bahwa aplikasi produktivitas yang hebat lahir dari kebutuhan nyata dan masukan jujur para penggunanya.
+          </p>
+          <p class="feedback-desc" style="margin-top: -12px;">
+            Setiap saran, laporan kendala, maupun kritik yang Anda sampaikan bukan sekadar pesan masuk—melainkan bahan bakar utama bagi kami untuk merilis pembaruan yang lebih stabil, fungsional, dan nyaman digunakan setiap hari.
+          </p>
+
+          <div class="feedback-pillars">
+            <div class="pillar-item">
+              <div class="pillar-icon">💡</div>
+              <div>
+                <strong>Punya Ide Fitur Baru?</strong>
+                <div style="font-size: 13px; color: #64748B;">Sampaikan fitur atau alur kerja yang menurut Anda bisa membuat Pulse semakin membantu.</div>
+              </div>
+            </div>
+
+            <div class="pillar-item">
+              <div class="pillar-icon">🐞</div>
+              <div>
+                <strong>Menemukan Kendala atau Bug?</strong>
+                <div style="font-size: 13px; color: #64748B;">Beri tahu kami jenis perangkat dan langkah kejadiannya agar segera kami perbaiki.</div>
+              </div>
+            </div>
+
+            <div class="pillar-item">
+              <div class="pillar-icon">💬</div>
+              <div>
+                <strong>Kritik & Masukan Terbuka</strong>
+                <div style="font-size: 13px; color: #64748B;">Ulasan jujur Anda tentang tampilan, alur penggunaan, dan kenyamanan sangat kami hargai.</div>
+              </div>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 14px; flex-wrap: wrap; align-items: center; font-size: 13.5px; color: #64748B; border-top: 1px solid var(--border-color); padding-top: 18px;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span style="width: 10px; height: 10px; border-radius: 50%; background: #10B981; display: inline-block;"></span>
+              <span>Aktif Dikembangkan & Diperbarui Rutin</span>
+            </div>
+            <span>•</span>
+            <span>Developer: <strong>Jacky</strong></span>
+          </div>
+        </div>
+
+        <!-- Right: Interactive Feedback Form -->
+        <div class="feedback-form-box">
+          <h3 style="font-size: 20px; font-weight: 800; color: var(--primary-dark); margin-bottom: 6px;">
+            Kirim Masukan Langsung
+          </h3>
+          <p style="font-size: 13.5px; color: var(--text-muted); margin-bottom: 20px;">
+            Pesan Anda akan langsung terkirim ke kotak masuk pengembang Pulse.
+          </p>
+
+          <form onsubmit="handleFeedbackSubmit(event)">
+            <div class="form-group">
+              <label class="form-label">Jenis Masukan</label>
+              <select id="feedback-type" class="form-select" required>
+                <option value="Saran Fitur Baru">💡 Usulan Fitur Baru</option>
+                <option value="Laporan Kendala / Bug">🐞 Laporan Bug / Kendala</option>
+                <option value="Kritik & Masukan UI/UX">🎨 Masukan Tampilan & Kemudahan Penggunaan</option>
+                <option value="Ulasan & Pertanyaan Umum">💬 Ulasan Umum / Lainnya</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Nama Anda (Opsional)</label>
+              <input type="text" id="feedback-name" class="form-input" placeholder="Contoh: Budi atau Pengguna Pulse">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Pesan, Kritik, atau Ide Anda</label>
+              <textarea id="feedback-message" class="form-textarea" placeholder="Tuliskan pengalaman Anda, apa yang perlu ditingkatkan, atau ide fitur yang Anda inginkan..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; padding: 12px; border: none; cursor: pointer; font-size: 14.5px;">
+              <span>Kirim Masukan ke Pengembang</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+            </button>
+          </form>
+
+          <div style="margin-top: 14px; text-align: center; font-size: 12.5px; color: var(--text-muted);">
+            Atau kontak langsung: <a href="mailto:info@kodeeweb.com" style="color: var(--brand-deep-teal); font-weight: 700; text-decoration: none;">info@kodeeweb.com</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section id="faq">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Tanya Jawab</span>
+        <h2 class="section-title">Pertanyaan yang Sering Diajukan</h2>
+        <p class="section-desc">Punya pertanyaan seputar fitur dan keamanan aplikasi Pulse? Temukan jawabannya di bawah
+          ini.</p>
+      </div>
+
+      <div class="faq-container">
+        <!-- FAQ 1 -->
+        <div class="faq-item open">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span>Apakah Pulse menghubungkan langsung ke rekening bank saya?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            <p>Tidak. Pulse berfungsi semata-mata sebagai alat bantu pembukuan pribadi mandiri (personal expense
+              tracker). Pulse tidak terhubung ke API rekening bank atau e-wallet, sehingga Anda memiliki kendali manual
+              penuh atas data yang ingin dicatat tanpa risiko transaksi otomatis.</p>
+          </div>
+        </div>
+
+        <!-- FAQ 2 -->
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span>Bagaimana cara kerja penghapusan akun permanen?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            <p>Anda dapat menghapus akun kapan saja melalui menu <em>Profil &gt; Hapus Akun</em> di dalam aplikasi
+              mobile. Sistem akan mengeksekusi penghapusan database menyeluruh (tugas, catatan, kebiasaan, riwayat
+              transaksi, anggaran, dan data login) secara permanen dan tidak dapat dipulihkan kembali.</p>
+          </div>
+        </div>
+
+        <!-- FAQ 3 -->
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span>Apakah saya bisa menggunakan Pulse saat offline?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            <p>Ya. Aplikasi menyimpan cache lokal di perangkat Anda menggunakan penyimpanan aman lokal sehingga Anda
+              tetap dapat membuka riwayat tugas dan catatan saat jaringan internet tidak stabil.</p>
+          </div>
+        </div>
+
+        <!-- FAQ 4 -->
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span>Bagaimana cara kerja notifikasi peringatan anggaran (Budget Alert)?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            <p>Ketika total transaksi pengeluaran bulanan Anda telah mencapai ambang batas yang Anda tentukan (misalnya
+              80% atau 100% dari limit anggaran kategori), Pulse akan memicu notifikasi peringatan cerdas agar Anda
+              dapat mengontrol pengeluaran sebelum overbudget.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <h3>
+            <span
+              style="width: 28px; height: 28px; border-radius: 8px; background: linear-gradient(135deg, var(--brand-deep-teal), var(--brand-fresh-teal)); display: inline-flex; align-items: center; justify-content: center; font-size: 16px;">P</span>
+            Pulse
+          </h3>
+          <p>
+            Aplikasi manajemen produktivitas harian, pelacak kebiasaan, dan pembukuan finansial pribadi yang dirancang
+            untuk kehidupan yang terorganisir dan tenang.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Fitur</h4>
+          <ul>
+            <li><a href="#fitur">Manajemen Tugas</a></li>
+            <li><a href="#fitur">Habit Tracker</a></li>
+            <li><a href="#fitur">Catatan Cerdas</a></li>
+            <li><a href="#fitur">Pencatatan Keuangan</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Unduh Aplikasi</h4>
+          <ul>
+            <li><a href="#download">Android APK (Langsung)</a></li>
+            <li><a href="#download">Google Play Store</a></li>
+            <li><a href="#download">Versi Rilis v1.0.0</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Legalitas</h4>
+          <ul>
+            <li><a href="privacy">Kebijakan Privasi</a></li>
+            <li><a href="terms">Ketentuan Layanan</a></li>
+            <li><a href="privacy#hak-pengguna">Penghapusan Akun</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Dukungan & Masukan</h4>
+          <ul>
+            <li><a href="#feedback">Kirim Kritik & Saran</a></li>
+            <li><a href="mailto:info@kodeeweb.com">info@kodeeweb.com</a></li>
+            <li><a href="mailto:jackyandrazat@gmail.com">jackyandrazat@gmail.com</a></li>
+            <li><a href="https://pulse.kodeeweb.com" target="_blank">pulse.kodeeweb.com</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          &copy; 2026 Pulse App. Hak Cipta Dilindungi Undang-Undang.
+        </div>
+        <div class="footer-legal-links">
+          <a href="privacy">Kebijakan Privasi</a>
+          <span>•</span>
+          <a href="terms">Ketentuan Layanan</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Tab switcher
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
+
+      event.target.classList.add('active');
+      const targetPane = document.getElementById(tabId);
+      if (targetPane) {
+        targetPane.classList.add('active');
+      }
+    }
+
+    // FAQ Accordion
+    function toggleFaq(headerEl) {
+      const item = headerEl.parentElement;
+      const isOpen = item.classList.contains('open');
+
+      // Close all
+      document.querySelectorAll('.faq-item').forEach(el => el.classList.remove('open'));
+
+      // If was not open, open it
+      if (!isOpen) {
+        item.classList.add('open');
+      }
+    }
+
+    // Feedback Form handler (Opens prefilled email to developer)
+    function handleFeedbackSubmit(e) {
+      e.preventDefault();
+      const type = document.getElementById('feedback-type').value;
+      const name = document.getElementById('feedback-name').value.trim() || 'Pengguna Pulse';
+      const msg = document.getElementById('feedback-message').value.trim();
+
+      const subject = encodeURIComponent(`[Feedback Pulse] ${type} dari ${name}`);
+      const body = encodeURIComponent(`Halo Jacky (Developer Pulse),\n\nJenis Masukan: ${type}\nDari: ${name}\n\nPesan / Kritik & Saran:\n${msg}\n\n--\nDikirim melalui pulse.kodeeweb.com`);
+
+      window.location.href = `mailto:info@kodeeweb.com?cc=jackyandrazat@gmail.com&subject=${subject}&body=${body}`;
+    }
+  </script>
+
+</body>
+
+</html>

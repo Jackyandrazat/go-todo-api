@@ -13,13 +13,19 @@ import (
 var DB *gorm.DB
 
 func ConnectDB() {
+	sslmode := Config.DBSSLMode
+	if sslmode == "" {
+		sslmode = "disable"
+	}
+
 	dsn := fmt.Sprintf(
-		"host=%s user=%s password=%s dbname=%s port=%s sslmode=require TimeZone=Asia/Jakarta",
+		"host=%s user=%s password=%s dbname=%s port=%s sslmode=%s TimeZone=Asia/Jakarta",
 		Config.DBHost,
 		Config.DBUser,
 		Config.DBPassword,
 		Config.DBName,
 		Config.DBPort,
+		sslmode,
 	)
 
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
@@ -39,6 +45,8 @@ func ConnectDB() {
 		&model.RecurringTransaction{},
 		&model.Alert{},
 		&model.UserSession{},
+		&model.Habit{},
+		&model.HabitLog{},
 	)
 	if err != nil {
 		log.Fatal("migration failed:", err)
@@ -54,6 +62,7 @@ func ConnectTestDB() {
 		Config.TestDBUser,
 		Config.TestDBPassword,
 		Config.TestDBName,
+		Config.TestDBSSLMode,
 	)
 
 }
@@ -64,14 +73,20 @@ func connect(
 	user string,
 	password string,
 	dbname string,
+	sslmode string,
 ) {
+	if sslmode == "" {
+		sslmode = "disable"
+	}
+
 	dsn := fmt.Sprintf(
-		"host=%s user=%s password=%s dbname=%s port=%s sslmode=require TimeZone=Asia/Jakarta",
+		"host=%s user=%s password=%s dbname=%s port=%s sslmode=%s TimeZone=Asia/Jakarta",
 		host,
 		user,
 		password,
 		dbname,
 		port,
+		sslmode,
 	)
 
 	database, err := gorm.Open(

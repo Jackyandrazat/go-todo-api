@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ketentuan Layanan - Pulse App</title>
+  <meta name="description" content="Ketentuan Layanan dan Syarat Penggunaan resmi aplikasi Pulse. Harap baca secara saksama aturan penggunaan aplikasi pengatur produktivitas dan pencatatan keuangan Anda.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --brand-deep-teal: #34908B;
+      --brand-fresh-teal: #6FBFB2;
+      --brand-soft-mint: #A5E9DD;
+      --brand-butter-yellow: #FDF4AF;
+      --primary-dark: #123432;
+      --text-main: #1E293B;
+      --text-secondary: #64748B;
+      --bg-page: #F8FAF9;
+      --bg-surface: #FFFFFF;
+      --border-color: #E2E8F0;
+      --card-shadow: 0 4px 20px -2px rgba(52, 144, 139, 0.08), 0 2px 6px -1px rgba(0, 0, 0, 0.04);
+      --radius-lg: 18px;
+      --radius-md: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Header Nav */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      padding: 16px 24px;
+    }
+
+    .nav-container {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--brand-deep-teal), var(--brand-fresh-teal));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 10px rgba(52, 144, 139, 0.3);
+      color: #FFFFFF;
+      font-weight: 800;
+      font-size: 20px;
+    }
+
+    .logo-text {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--primary-dark);
+      letter-spacing: -0.5px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 8px;
+    }
+
+    .nav-btn {
+      padding: 8px 16px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+
+    .nav-btn.active {
+      background: var(--brand-deep-teal);
+      color: #FFFFFF;
+    }
+
+    .nav-btn:not(.active) {
+      color: var(--text-secondary);
+      background: #F1F5F9;
+    }
+
+    .nav-btn:not(.active):hover {
+      background: #E2E8F0;
+      color: var(--text-main);
+    }
+
+    /* Main Container */
+    main {
+      max-width: 900px;
+      margin: 40px auto 80px;
+      padding: 0 24px;
+    }
+
+    /* Hero Card */
+    .hero-card {
+      background: linear-gradient(135deg, #1A4C49 0%, #2B7B77 100%);
+      color: #FFFFFF;
+      border-radius: 24px;
+      padding: 40px;
+      margin-bottom: 32px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 12px 32px -4px rgba(26, 76, 73, 0.25);
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(253, 244, 175, 0.2);
+      border: 1px solid rgba(253, 244, 175, 0.4);
+      color: var(--brand-butter-yellow);
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .hero-title {
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      line-height: 1.25;
+      margin-bottom: 12px;
+    }
+
+    .hero-desc {
+      font-size: 16px;
+      color: #E2E8F0;
+      max-width: 650px;
+    }
+
+    .hero-meta {
+      margin-top: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: 13px;
+      color: var(--brand-soft-mint);
+    }
+
+    /* Content Card */
+    .content-card {
+      background: var(--bg-surface);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--card-shadow);
+    }
+
+    .section {
+      margin-bottom: 36px;
+    }
+
+    .section:last-child {
+      margin-bottom: 0;
+    }
+
+    .section-title {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--primary-dark);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .section-num {
+      width: 28px;
+      height: 28px;
+      background: rgba(52, 144, 139, 0.15);
+      color: var(--brand-deep-teal);
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    p {
+      margin-bottom: 12px;
+      color: #334155;
+    }
+
+    ul, ol {
+      margin-left: 20px;
+      margin-bottom: 16px;
+    }
+
+    li {
+      margin-bottom: 8px;
+      color: #334155;
+    }
+
+    .highlight-box {
+      background: #F0FDF4;
+      border-left: 4px solid var(--brand-fresh-teal);
+      padding: 16px 20px;
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      margin: 18px 0;
+      font-size: 14.5px;
+    }
+
+    .warning-box {
+      background: #FFFBEB;
+      border-left: 4px solid #F59E0B;
+      padding: 16px 20px;
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      margin: 18px 0;
+      font-size: 14.5px;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border-color);
+      background: #FFFFFF;
+      padding: 32px 24px;
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 14px;
+    }
+
+    footer a {
+      color: var(--brand-deep-teal);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 640px) {
+      .hero-card {
+        padding: 24px;
+      }
+      .hero-title {
+        font-size: 24px;
+      }
+      .content-card {
+        padding: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <header>
+    <div class="nav-container">
+      <a href="https://pulse.kodeeweb.com" class="brand-logo">
+        <div class="logo-icon">P</div>
+        <div class="logo-text">Pulse</div>
+      </a>
+      <div class="nav-links">
+        <a href="privacy" class="nav-btn">Kebijakan Privasi</a>
+        <a href="terms" class="nav-btn active">Ketentuan Layanan</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Hero Card -->
+    <div class="hero-card">
+      <div class="hero-badge">Dokumen Legal Resmi</div>
+      <h1 class="hero-title">Ketentuan & Syarat Penggunaan Layanan</h1>
+      <p class="hero-desc">Aturan dan panduan penggunaan aplikasi Pulse untuk mengelola produktivitas pribadi, tugas harian, kebiasaan, dan pencatatan keuangan Anda.</p>
+      <div class="hero-meta">
+        <span>📅 Terakhir diperbarui: 24 September 2026</span>
+        <span>•</span>
+        <span>🌐 Versi Dokumen: 1.0</span>
+      </div>
+    </div>
+
+    <!-- Content Card -->
+    <div class="content-card">
+
+      <!-- Section 1 -->
+      <div class="section" id="penerimaan-ketentuan">
+        <h2 class="section-title"><span class="section-num">1</span> Penerimaan Ketentuan</h2>
+        <p>Dengan mengunduh, memasang (install), mengakses, atau menggunakan aplikasi mobile <strong>Pulse</strong> ("Aplikasi", "Kami", atau "Layanan"), Anda menyatakan bahwa Anda telah membaca, memahami, dan menyetujui untuk terikat oleh seluruh Syarat & Ketentuan Layanan ini. Jika Anda tidak menyetujui ketentuan ini, Anda disarankan untuk tidak menggunakan Layanan kami.</p>
+      </div>
+
+      <!-- Section 2 -->
+      <div class="section" id="deskripsi-layanan">
+        <h2 class="section-title"><span class="section-num">2</span> Deskripsi Layanan</h2>
+        <p>Pulse adalah aplikasi manajemen gaya hidup produktif all-in-one yang menyediakan berbagai modul produktivitas dan pencatatan:</p>
+        <ul>
+          <li><strong>Tugas & Produktivitas:</strong> Pengelolaan To-Do list, pengingat tenggat waktu, penanda prioritas, dan status penyelesaian tugas.</li>
+          <li><strong>Pelacak Kebiasaan (Habit Tracker):</strong> Pencatatan target kebiasaan harian, visualisasi streak konsistensi, dan log riwayat.</li>
+          <li><strong>Catatan Cepat (Notes):</strong> Tempat menulis ide, draf teks, dan catatan harian pribadi Anda.</li>
+          <li><strong>Pencatatan Keuangan Pribadi:</strong> Pelacakan pengeluaran & pemasukan, kategorisasi kustom, penetapan batas anggaran bulanan, serta ringkasan riwayat finansial.</li>
+          <li><strong>Pemindai Struk Transaksi:</strong> Fitur opsional pemindaian gambar/struk belanja untuk mempermudah imputasi transaksi keuangan Anda.</li>
+        </ul>
+      </div>
+
+      <!-- Section 3 -->
+      <div class="section" id="akun-dan-keamanan">
+        <h2 class="section-title"><span class="section-num">3</span> Akun Pengguna & Tanggung Jawab Kredensial</h2>
+        <p>Untuk menggunakan fitur sinkronisasi awan (cloud sync), Anda harus membuat akun pengguna:</p>
+        <ul>
+          <li><strong>Akurasi Informasi:</strong> Anda setuju untuk memberikan informasi pendaftaran yang benar, termasuk username dan kata sandi yang valid.</li>
+          <li><strong>Kerahasiaan Akun:</strong> Anda bertanggung jawab penuh untuk menjaga kerahasiaan kata sandi Anda dan segala aktivitas yang terjadi di bawah akun Anda.</li>
+          <li><strong>Pemberitahuan Pelanggaran:</strong> Anda wajib segera memberi tahu kami jika mendeteksi adanya penggunaan akun tanpa izin atau pelanggaran keamanan lainnya.</li>
+        </ul>
+      </div>
+
+      <!-- Section 4 -->
+      <div class="section" id="penafian-finansial">
+        <h2 class="section-title"><span class="section-num">4</span> Penafian Finansial (Financial Disclaimer)</h2>
+        <div class="warning-box">
+          <strong>PENTING DIBACA:</strong> Modul keuangan Pulse dirancang semata-mata sebagai alat bantu pencatatan buku pribadi (personal expense tracking & budgeting).
+        </div>
+        <ul>
+          <li>Pulse <strong>bukanlah</strong> lembaga perbankan, penyedia jasa pembayaran (PJP), dompet digital berlisensi, pialang investasi, atau penasihat keuangan bersertifikat.</li>
+          <li>Pulse tidak memegang, memindahkan, atau memproses dana atau uang riil Anda. Seluruh nominal yang dicatat adalah data komputasi manual yang diinput oleh pengguna.</li>
+          <li>Kalkulasi anggaran, rasio pengeluaran, dan visualisasi grafik disediakan untuk tujuan informasi semata dan tidak dapat dianggap sebagai nasihat perpajakan, investasi, atau hukum.</li>
+        </ul>
+      </div>
+
+      <!-- Section 5 -->
+      <div class="section" id="kepemilikan-konten">
+        <h2 class="section-title"><span class="section-num">5</span> Hak Kekayaan Intelektual & Konten Pengguna</h2>
+        <p><strong>Konten Anda:</strong> Seluruh data catatan, tugas, target kebiasaan, dan log transaksi yang Anda masukkan ke dalam Pulse tetap menjadi hak milik Anda sepenuhnya. Anda memberikan izin kepada kami hanya sebatas untuk menyimpan dan memproses data tersebut agar Layanan dapat berfungsi bagi Anda.</p>
+        <p><strong>Aset Aplikasi:</strong> Seluruh kode sumber, desain UI/UX, logo Pulse, grafik, ikon, dan materi branding adalah milik sah pengembang Pulse dan dilindungi oleh undang-undang hak cipta dan kekayaan intelektual.</p>
+      </div>
+
+      <!-- Section 6 -->
+      <div class="section" id="penggunaan-dilarang">
+        <h2 class="section-title"><span class="section-num">6</span> Penggunaan yang Dilarang</h2>
+        <p>Saat menggunakan Pulse, Anda dilarang keras untuk:</p>
+        <ul>
+          <li>Melakukan dekompilasi, reverse engineering, atau upaya mengekstrak kode sumber aplikasi.</li>
+          <li>Melakukan serangan denial-of-service (DoS/DDoS), injeksi eksploitasi, atau membebani infrastruktur API server secara tidak wajar.</li>
+          <li>Menggunakan script otomatis, bot, spider, atau scraper tanpa izin tertulis dari pihak Pulse.</li>
+          <li>Menyimpan konten yang melanggar hukum, berisi malware, ancaman, pornografi, atau materi yang melanggar hak orang lain.</li>
+        </ul>
+      </div>
+
+      <!-- Section 7 -->
+      <div class="section" id="penghentian-layanan">
+        <h2 class="section-title"><span class="section-num">7</span> Penghentian & Penghapusan Akun</h2>
+        <div class="highlight-box">
+          <strong>Kendali Sepenuhnya di Tangan Anda:</strong> Anda dapat menghapus akun dan seluruh data terkait kapan saja melalui menu <em>Profil &gt; Hapus Akun</em> di dalam aplikasi mobile.
+        </div>
+        <p>Kami berhak untuk menangguhkan atau menghentikan akses Anda ke Layanan, dengan atau tanpa pemberitahuan sebelumnya, jika kami mendeteksi adanya pelanggaran serius terhadap Ketentuan Layanan ini atau aktivitas berbahaya yang merugikan pengguna lain.</p>
+      </div>
+
+      <!-- Section 8 -->
+      <div class="section" id="batasan-tanggung-jawab">
+        <h2 class="section-title"><span class="section-num">8</span> Batasan Tanggung Jawab</h2>
+        <p>Aplikasi disediakan atas dasar <em>"sebagaimana adanya" (AS IS)</em> dan <em>"sebagaimana tersedia" (AS AVAILABLE)</em> tanpa jaminan apa pun, baik tersurat maupun tersirat. Kami berusaha menjaga keandalan dan ketersediaan sistem, namun kami tidak bertanggung jawab atas kerugian tidak langsung, kehilangan data akibat kerusakan perangkat keras Anda, atau gangguan layanan di luar kendali wajar kami.</p>
+      </div>
+
+      <!-- Section 9 -->
+      <div class="section" id="perubahan-ketentuan">
+        <h2 class="section-title"><span class="section-num">9</span> Perubahan Ketentuan Layanan</h2>
+        <p>Kami dapat memperbarui Ketentuan Layanan ini sewaktu-waktu. Perubahan material akan diumumkan melalui aplikasi atau diperbarui pada halaman ini. Melanjutkan penggunaan aplikasi setelah pembaruan berlaku dianggap sebagai persetujuan Anda terhadap ketentuan yang baru.</p>
+      </div>
+
+      <!-- Section 10 -->
+      <div class="section" id="kontak-hukum">
+        <h2 class="section-title"><span class="section-num">10</span> Hukum yang Berlaku & Kontak</h2>
+        <p>Ketentuan Layanan ini diatur dan ditafsirkan sesuai dengan hukum yang berlaku di Republik Indonesia.</p>
+        <p>Jika Anda memiliki pertanyaan seputar Ketentuan Layanan ini, silakan hubungi tim kami:</p>
+        <ul>
+          <li><strong>Email:</strong> info@kodeeweb.com / jackyandrazat@gmail.com</li>
+          <li><strong>Website:</strong> <a href="https://pulse.kodeeweb.com" target="_blank" style="color: var(--brand-deep-teal); font-weight: 600;">https://pulse.kodeeweb.com</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 Pulse App. Hak Cipta Dilindungi Undang-Undang.</p>
+    <p style="margin-top: 6px;">
+      <a href="privacy">Kebijakan Privasi</a> • <a href="terms">Ketentuan Layanan</a>
+    </p>
+  </footer>
+
+</body>
+</html>
