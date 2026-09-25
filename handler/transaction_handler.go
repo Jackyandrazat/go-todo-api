@@ -43,7 +43,7 @@ func (h *TransactionHandler) GetTransactions(c *gin.Context) {
 	userID := userIDRaw.(uint)
 
 	page, _ := strconv.Atoi(c.DefaultQuery("page", "1"))
-	limit, _ := strconv.Atoi(c.DefaultQuery("limit", "10"))
+	limit, _ := strconv.Atoi(c.DefaultQuery("limit", "100"))
 
 	if page < 1 {
 		page = 1

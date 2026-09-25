@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="id">
 
 <head>
@@ -1753,7 +1753,7 @@
 
             <div class="download-buttons">
               <!-- Direct APK Download Button -->
-              <a href="download/pulse-latest.apk" class="btn-store btn-store-apk" download>
+              <a href="https://expo.dev/artifacts/eas/Nli2Up62SY8o7DxZV6dny2RZXYUq5lcUedAO2iEM9-g.apk" class="btn-store btn-store-apk" download="pulse-latest.apk">
                 <div class="store-icon">
                   <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
                     stroke-linecap="round" stroke-linejoin="round">
@@ -1803,7 +1803,7 @@
           </div>
 
           <div class="apk-specs">
-            <span>📦 Ukuran: ~108 MB</span>
+            <span>📦 Ukuran: ~52 MB</span>
             <span>•</span>
             <span>📱 Kompatibilitas: Android 8.0 (Oreo) ke atas</span>
             <span>•</span>
@@ -1827,15 +1827,15 @@
                 <button type="button" id="qr-tab-direct" class="qr-tab-btn" onclick="switchQrTab('direct')">📥 Unduh APK</button>
               </div>
 
-              <a id="qr-link" href="https://expo.dev/accounts/jackyandrazat/projects/pulse-app/builds/c27d4d22-4673-467f-80f9-c2b98018e630"
+              <a id="qr-link" href="https://expo.dev/accounts/jackyandrazat/projects/pulse-app/builds/7585ac19-9deb-4a46-9a98-2b3ba72782fc"
                 target="_blank" title="Klik atau Pindai untuk Membuka Halaman Instalasi">
                 <div class="qr-box">
-                  <img id="qr-img" src="/qr-expo.png" alt="Scan QR Code Expo Pulse" width="146" height="146"
+                  <img id="qr-img" src="qr-expo.png" alt="Scan QR Code Expo Pulse" width="146" height="146"
                     style="display: block; border-radius: 6px;">
                 </div>
               </a>
               <div style="display: flex; flex-direction: column; gap: 4px; align-items: center;">
-                <a id="qr-direct-link" href="https://expo.dev/accounts/jackyandrazat/projects/pulse-app/builds/c27d4d22-4673-467f-80f9-c2b98018e630" target="_blank"
+                <a id="qr-direct-link" href="https://expo.dev/accounts/jackyandrazat/projects/pulse-app/builds/7585ac19-9deb-4a46-9a98-2b3ba72782fc" target="_blank"
                   style="font-size: 13px; font-weight: 700; color: var(--brand-deep-teal); text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
                   <span>🌐 Buka Halaman Expo</span>
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
@@ -2175,19 +2175,19 @@
       if (mode === 'expo') {
         expoBtn.classList.add('active');
         directBtn.classList.remove('active');
-        qrLink.href = 'https://expo.dev/accounts/jackyandrazat/projects/pulse-app/builds/c27d4d22-4673-467f-80f9-c2b98018e630';
-        qrImg.src = '/qr-expo.png';
+        qrLink.href = 'https://expo.dev/accounts/jackyandrazat/projects/pulse-app/builds/7585ac19-9deb-4a46-9a98-2b3ba72782fc';
+        qrImg.src = 'qr-expo.png';
         qrCaption.textContent = 'Pindai kamera untuk membuka halaman instalasi Expo Build';
-        qrDirectLink.innerHTML = '<span>🌐 Buka Halaman Expo</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>';
-        qrDirectLink.href = 'https://expo.dev/accounts/jackyandrazat/projects/pulse-app/builds/c27d4d22-4673-467f-80f9-c2b98018e630';
+        qrDirectLink.innerHTML = '<span>📥 Unduh pulse-latest.apk</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>';
+        qrDirectLink.href = 'https://expo.dev/accounts/jackyandrazat/projects/pulse-app/builds/7585ac19-9deb-4a46-9a98-2b3ba72782fc';
       } else {
         directBtn.classList.add('active');
         expoBtn.classList.remove('active');
-        qrLink.href = '/download/pulse-latest.apk';
-        qrImg.src = '/qr-direct.png';
+        qrLink.href = 'https://expo.dev/artifacts/eas/Nli2Up62SY8o7DxZV6dny2RZXYUq5lcUedAO2iEM9-g.apk';
+        qrImg.src = 'qr-direct.png';
         qrCaption.textContent = 'Pindai kamera untuk langsung unduh APK ke smartphone';
         qrDirectLink.innerHTML = '<span>📥 Unduh pulse-latest.apk</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>';
-        qrDirectLink.href = '/download/pulse-latest.apk';
+        qrDirectLink.href = 'https://expo.dev/artifacts/eas/Nli2Up62SY8o7DxZV6dny2RZXYUq5lcUedAO2iEM9-g.apk';
       }
     }
   </script>

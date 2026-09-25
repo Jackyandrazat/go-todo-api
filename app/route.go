@@ -1,4 +1,4 @@
-package app
+﻿package app
 
 import (
 	"go-todo-api/config"
@@ -49,14 +49,14 @@ func SetupRouter(r *gin.Engine) *gin.Engine {
 			c.File("./public/download/pulse-latest.apk")
 			return
 		}
-		c.Redirect(302, "https://expo.dev/artifacts/eas/kZsvVWVulEtE7YTZIQZC6_4NlhxqBELOjViSe8I_MtQ.apk")
+		c.Redirect(302, "https://expo.dev/artifacts/eas/Nli2Up62SY8o7DxZV6dny2RZXYUq5lcUedAO2iEM9-g.apk")
 	})
 	r.GET("/download/pulse-v1.0.0.apk", func(c *gin.Context) {
 		if _, err := os.Stat("./public/download/pulse-v1.0.0.apk"); err == nil {
 			c.File("./public/download/pulse-v1.0.0.apk")
 			return
 		}
-		c.Redirect(302, "https://expo.dev/artifacts/eas/kZsvVWVulEtE7YTZIQZC6_4NlhxqBELOjViSe8I_MtQ.apk")
+		c.Redirect(302, "https://expo.dev/artifacts/eas/Nli2Up62SY8o7DxZV6dny2RZXYUq5lcUedAO2iEM9-g.apk")
 	})
 
 	r.GET("/ready", func(c *gin.Context) {
